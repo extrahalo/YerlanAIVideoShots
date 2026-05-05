@@ -1,13 +1,15 @@
 # Yerlan AI Video Shots
 
-Public shotlist page for the rough edit of the documentary film `Aizhan. Mura`.
+Public working pages for the rough edit and character approval of the documentary film `Aizhan. Mura`.
 
-Live page after GitHub Pages is enabled:
+## Live pages
 
-https://extrahalo.github.io/YerlanAIVideoShots/
+- Shotlist: https://extrahalo.github.io/YerlanAIVideoShots/
+- Characters: https://extrahalo.github.io/YerlanAIVideoShots/characters.html
 
 ## Workflow
 
 - `index.html` contains the shotlist web page.
-- Codex can update this file as the scenario and montage structure changes.
-- GitHub Pages keeps the same public link for the team.
+- `characters.html` contains the character approval table.
+- Codex can update these files as the scenario, montage structure, and character generation process change.
+- GitHub Pages keeps the same public links for the team.
