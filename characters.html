@@ -19,8 +19,8 @@
     button{background:#7b4b2a;color:white;cursor:pointer}
     .card{background:#fffdf8;border:1px solid #ddd3c5;border-radius:8px;margin:10px 0;padding:13px;display:grid;grid-template-columns:78px 180px 150px 1.1fr 1.2fr 1fr 130px;gap:10px}
     .id{font-weight:800;color:#7b4b2a}.name{font-weight:800}.tag{background:#e7efe9;color:#2f6656;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:700;display:inline-block}
-    .small{font-size:13px;color:#6c6257}.status{font-weight:700}.pending{color:#8a5a00}.needs{color:#9b2c2c}
-    .note{background:#fff8e8;border:1px solid #ead8b8;border-radius:8px;padding:12px;margin:18px 0;color:#5d4b36}
+    .small{font-size:13px;color:#6c6257}.status{font-weight:700}.pending{color:#8a5a00}.ready{color:#2f6656}.needs{color:#9b2c2c}
+    .note{background:#eef6f0;border:1px solid #cfe1d4;border-radius:8px;padding:12px;margin:18px 0;color:#2f5542}
     @media(max-width:900px){.stats,.tools{grid-template-columns:1fr}.card{grid-template-columns:1fr}.card>*:before{display:block;font-size:11px;text-transform:uppercase;color:#6c6257;letter-spacing:.04em}.id:before{content:"ID"}.person:before{content:"Персонаж"}.age:before{content:"Возраст"}.role:before{content:"Роль"}.refs:before{content:"Фото"}.use:before{content:"Где в фильме"}.state:before{content:"Статус"}}
   </style>
 </head>
@@ -51,32 +51,32 @@
 </div>
 <main>
   <div class="wrap">
-    <div class="note">Важно: большинство файлов из папки <b>Originalphotos</b> сейчас недоступны для чтения из-за macOS-разрешений. Таблица уже готова, но для точного портретного сходства нужно открыть доступ к фото или пересохранить их в новую папку без ограничения.</div>
+    <div class="note">Референсы из <b>Originalphotos</b> подключены локально: 18 фотографий скопированы в рабочую папку персонажей и собраны в контактный лист. Оригинальные семейные фото пока не публикуются на GitHub Pages; на странице указаны только названия файлов и статус подготовки.</div>
     <div id="app"></div>
   </div>
 </main>
 <script>
 const rows = [
-["CH-001","Aitzhan","strong 1940s / early 1950s","Main historical character","Series 1-2: village respect, labor, mountain, qula at, Baltaqadyr","Aitzhan.jpeg; Aitzhan 2.jpeg; Aitzhan 3-AI.jpeg","pending_generation"],
-["CH-002","Aitzhan","post-illness 1945-1955","Main historical character","Series 3: illness, field labor after illness, farewell","Aitzhan.jpeg; Aitzhan 2.jpeg","pending_generation"],
-["CH-003","Niyetzhan","child 10-14","Main historical character","Series 1-2: field work, qyrman, horse life on jailau","Nietzhan-young.jpeg; Nietzhan-young2.jpeg","pending_generation"],
-["CH-004","Niyetzhan","youth 17","Main historical character","Series 3: father deathbed, amanat, vow","Nietzhan-young.jpeg; Nietzhan-young2.jpeg","pending_generation"],
-["CH-005","Niyetzhan","young adult 20-25","Main historical character","Optional/future: documents and return line if restored","Nietzhan-middleage*.jpeg","pending_generation"],
-["CH-006","Niyetzhan","middle age","Historical narrator layer","Archive narrator visual support","Nietzhan-middleage*.jpeg","pending_generation"],
-["CH-007","Niyetzhan","old age","Historical narrator layer","Archive narrator visual support","Nietzhan-oldage*.jpeg","pending_generation"],
-["CH-008","Aitzhan wife / Niyetzhan mother","middle age","Key family character","Series 1: field work, family labor","NiezhanWife-middleage.jpeg; GM.jpeg","pending_generation"],
-["CH-009","Erlan","child","Family character","Prologue memory support / family line","Erlan-kid.jpeg; Erlan-kid2.jpeg; Erlan-kid3.jpeg","pending_generation"],
+["CH-001","Aitzhan","strong 1940s / early 1950s","Main historical character","Series 1-2: village respect, labor, mountain, qula at, Baltaqadyr","Aitzhan.jpeg; Aitzhan 2.jpeg; Aitzhan 3-AI.jpeg","ready_for_generation"],
+["CH-002","Aitzhan","post-illness 1945-1955","Main historical character","Series 3: illness, field labor after illness, farewell","Aitzhan.jpeg; Aitzhan 2.jpeg","ready_for_generation"],
+["CH-003","Niyetzhan","child 10-14","Main historical character","Series 1-2: field work, qyrman, horse life on jailau","Nietzhan-young.jpeg; Nietzhan-young2.jpeg","ready_for_generation"],
+["CH-004","Niyetzhan","youth 17","Main historical character","Series 3: father deathbed, amanat, vow","Nietzhan-young.jpeg; Nietzhan-young2.jpeg","ready_for_generation"],
+["CH-005","Niyetzhan","young adult 20-25","Main historical character","Optional/future: documents and return line if restored","Nietzhan-middleage*.jpeg","ready_for_generation"],
+["CH-006","Niyetzhan","middle age","Historical narrator layer","Archive narrator visual support","Nietzhan-middleage*.jpeg","ready_for_generation"],
+["CH-007","Niyetzhan","old age","Historical narrator layer","Archive narrator visual support","Nietzhan-oldage*.jpeg","ready_for_generation"],
+["CH-008","Aitzhan wife / Niyetzhan mother","middle age","Key family character","Series 1: field work, family labor","NiezhanWife-middleage.jpeg; GM.jpeg","ready_for_generation"],
+["CH-009","Erlan","child","Family character","Prologue memory support / family line","Erlan-kid.jpeg; Erlan-kid2.jpeg; Erlan-kid3.jpeg","ready_for_generation"],
 ["CH-010","Erlan","present day","Keeper of memory","Prologue and epilogue frame","Current reference needed","needs_reference"],
-["CH-011","Baltaqadyr","30-40","Secondary plot character","Series 2: thief transformed by Aitzhan","No archival photo","pending_generation"],
-["CH-012","Ak boz atty eles","ageless elder","Mystical vision","Series 2: mountain warning vision","No archival photo","pending_generation"],
-["CH-013","Baltabai","young adult","Secondary character","Series 2: ignores warning and goes to mountain","No archival photo","pending_generation"],
-["CH-014","Qasey","young adult","Secondary character","Series 2: ignores warning and goes to mountain","No archival photo","pending_generation"],
-["CH-015","Konyrkulzha","adult healer","Secondary character","Series 3: heals Aitzhan after typhus","No archival photo","pending_generation"],
-["CH-016","Uighur young neighbor","18-20","Secondary character","Series 3: tells Aitzhan dream to community","No archival photo","pending_generation"],
-["CH-017","Aitzhan parents / dream figures","elderly memory","Vision characters","Series 3: Aitzhan dream","No archival photo","pending_generation"],
-["CH-018","Karasu villagers","mixed ages","Massovka","Series 1: sogym, asar, elders help","No archival photo","pending_generation"],
-["CH-019","Qyzay men","adult group","Massovka / plot group","Series 2: demand justice after theft","No archival photo","pending_generation"],
-["CH-020","Jailau youth","mixed young","Massovka","Series 2: horses, qymyz, evening games","No archival photo","pending_generation"]
+["CH-011","Baltaqadyr","30-40","Secondary plot character","Series 2: thief transformed by Aitzhan","No archival photo","ready_for_generation"],
+["CH-012","Ak boz atty eles","ageless elder","Mystical vision","Series 2: mountain warning vision","No archival photo","ready_for_generation"],
+["CH-013","Baltabai","young adult","Secondary character","Series 2: ignores warning and goes to mountain","No archival photo","ready_for_generation"],
+["CH-014","Qasey","young adult","Secondary character","Series 2: ignores warning and goes to mountain","No archival photo","ready_for_generation"],
+["CH-015","Konyrkulzha","adult healer","Secondary character","Series 3: heals Aitzhan after typhus","No archival photo","ready_for_generation"],
+["CH-016","Uighur young neighbor","18-20","Secondary character","Series 3: tells Aitzhan dream to community","No archival photo","ready_for_generation"],
+["CH-017","Aitzhan parents / dream figures","elderly memory","Vision characters","Series 3: Aitzhan dream","No archival photo","ready_for_generation"],
+["CH-018","Karasu villagers","mixed ages","Massovka","Series 1: sogym, asar, elders help","No archival photo","ready_for_generation"],
+["CH-019","Qyzay men","adult group","Massovka / plot group","Series 2: demand justice after theft","No archival photo","ready_for_generation"],
+["CH-020","Jailau youth","mixed young","Massovka","Series 2: horses, qymyz, evening games","No archival photo","ready_for_generation"]
 ];
 const app=document.getElementById("app"), q=document.getElementById("q"), f=document.getElementById("f");
 const roles=[...new Set(rows.map(r=>r[3]))]; roles.forEach(x=>f.add(new Option(x,x)));
@@ -86,7 +86,15 @@ document.getElementById("secondary").textContent=rows.filter(r=>/Secondary|Visio
 function render(){
   const s=q.value.toLowerCase();
   const out=rows.filter(r=>(f.value==="Все роли"||r[3]===f.value)&&r.join(" ").toLowerCase().includes(s));
-  app.innerHTML=out.map(r=>`<div class="card"><div class="id">${r[0]}</div><div class="person"><div class="name">${r[1]}</div></div><div class="age"><span class="tag">${r[2]}</span></div><div class="role small">${r[3]}</div><div class="use small">${r[4]}</div><div class="refs small">${r[5]}</div><div class="state"><span class="status ${r[6]==="needs_reference"?"needs":"pending"}">${r[6]}</span></div></div>`).join("");
+  app.innerHTML=out.map(r=>`<div class="card">
+    <div class="id">${r[0]}</div>
+    <div class="person"><div class="name">${r[1]}</div></div>
+    <div class="age"><span class="tag">${r[2]}</span></div>
+    <div class="role small">${r[3]}</div>
+    <div class="use small">${r[4]}</div>
+    <div class="refs small">${r[5]}</div>
+    <div class="state"><span class="status ${r[6]==="needs_reference"?"needs":r[6]==="ready_for_generation"?"ready":"pending"}">${r[6]}</span></div>
+  </div>`).join("");
 }
 q.oninput=render; f.onchange=render; render();
 </script>
