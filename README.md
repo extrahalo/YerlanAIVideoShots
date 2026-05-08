@@ -1,10 +1,12 @@
 # Aizhan shotlist site
 
-This folder contains the public web page for the rough-edit shotlist of the film "Aizhan. Mura".
+This folder contains the public web pages for the rough-edit shotlist and character approval board of the film "Aizhan. Mura".
 
 ## Files
 
-- `index.html` — the live web page.
+- `index.html` — the rough-edit shotlist page.
+- `characters.html` — the character approval page with generated concept images and browser-saved comments.
+- `assets/characters/` — generated character PNG files used by the public page.
 
 ## Publishing workflow
 
@@ -29,4 +31,3 @@ When the shotlist changes:
 2. Codex edits `shotlist-site/index.html`.
 3. The updated file is pushed or uploaded to the same GitHub repository.
 4. GitHub Pages refreshes the same public link.
-

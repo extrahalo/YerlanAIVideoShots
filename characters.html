@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Айтжан. Мұра — персонажи</title>
+  <style>
+    :root {
+      --ink:#28231d; --muted:#6c6257; --paper:#fffdf8; --bg:#f6f3ee; --line:#ddd3c5;
+      --brown:#7b4b2a; --green:#2f6656; --green-soft:#e7efe9; --amber:#8a5a00; --red:#9b2c2c;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+    header{background:var(--paper);border-bottom:1px solid var(--line);padding:28px}
+    main{padding:22px 28px 42px}
+    .wrap{max-width:1320px;margin:auto}
+    h1{margin:0 0 8px;font-size:38px;line-height:1.08}
+    h2{margin:26px 0 12px;font-size:24px}
+    .sub{color:var(--muted);max-width:920px}
+    .site-nav{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+    .site-nav a{background:var(--brown);color:#fff;text-decoration:none;border-radius:8px;padding:9px 12px;font-weight:700}
+    .site-nav a:nth-child(2){background:var(--green)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:10px;margin-top:18px}
+    .stat{background:#ece3d7;border:1px solid var(--line);border-radius:8px;padding:12px}
+    .stat b{display:block;font-size:24px}
+    .bar{position:sticky;top:0;background:#f6f3eeeb;border-bottom:1px solid var(--line);padding:10px 28px;backdrop-filter:blur(8px);z-index:8}
+    .tools{display:grid;grid-template-columns:1fr 250px auto auto auto;gap:10px}
+    input,select,button,.tool-link{min-height:40px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;padding:0 12px}
+    button{background:var(--brown);color:white;cursor:pointer;font-weight:700}
+    .tool-link{display:flex;align-items:center;justify-content:center;background:var(--green);color:#fff;text-decoration:none;border-color:var(--green);font-weight:700}
+    .note{background:#eef6f0;border:1px solid #cfe1d4;border-radius:8px;padding:12px;margin:18px 0;color:#2f5542}
+    .warning{background:#fff4df;border-color:#ead0a3;color:#5b3d09}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;min-height:100%}
+    .media{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px;background:#ede5da;border-bottom:1px solid var(--line)}
+    .slot{position:relative;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f9f5ed;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px;text-align:center;padding:8px}
+    .slot img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+    .slot span{position:absolute;left:6px;top:6px;background:#0009;color:white;border-radius:999px;padding:2px 6px;font-size:11px;font-weight:700}
+    .body{padding:13px;display:flex;flex-direction:column;gap:10px;flex:1}
+    .topline{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .id{font-weight:900;color:var(--brown);white-space:nowrap}
+    .name{font-weight:900;font-size:20px;line-height:1.16}
+    .tag{background:var(--green-soft);color:var(--green);border-radius:999px;padding:3px 8px;font-size:12px;font-weight:800;display:inline-block;width:max-content}
+    .small{font-size:13px;color:var(--muted)}
+    .label{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);font-weight:800;margin-bottom:2px}
+    .status{font-weight:800}
+    .status.ready{color:var(--green)} .status.need{color:var(--red)} .status.option{color:var(--amber)}
+    .comment{margin-top:auto}
+    textarea{width:100%;min-height:70px;resize:vertical;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;padding:10px 12px}
+    .saved{font-size:12px;color:var(--green);margin-top:4px;min-height:18px}
+    .add-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+    .file-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:#fbf8f1;min-height:34px;padding:0 10px;font-size:13px;font-weight:700;cursor:pointer}
+    .file-btn input{display:none}
+    dialog{border:0;border-radius:8px;padding:0;background:transparent;max-width:min(94vw,1100px)}
+    dialog::backdrop{background:#000b}
+    .modal{background:#111;color:white;border-radius:8px;overflow:hidden;box-shadow:0 20px 70px #0008}
+    .modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 12px;background:#1f1f1f}
+    .modal-title{font-weight:800}
+    .modal button{min-height:34px;background:#fff;color:#111;border:0}
+    .modal img{display:block;max-width:94vw;max-height:82vh;width:auto;height:auto;margin:auto;background:#222}
+    .empty{border:1px dashed #cbbba8;background:#fbf8f1;color:var(--muted);border-radius:8px;padding:14px;text-align:center}
+    @media(max-width:900px){
+      header,main,.bar{padding-left:16px;padding-right:16px}
+      h1{font-size:30px}
+      .stats,.tools{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>«Айтжан. Мұра» — персонажи для утверждения</h1>
+    <p class="sub">Рабочая страница персонажей и массовки. Визуальные активы вынесены отдельной группой и не считаются персонажами. У каждого образа есть понятное название, место в сценарии, комментарий редактора, три слота итераций и открытие изображения в крупном размере.</p>
+    <nav class="site-nav" aria-label="Навигация">
+      <a href="./">Шотлист</a>
+      <a href="characters.html">Персонажи</a>
+      <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
+    </nav>
+    <div class="stats">
+      <div class="stat"><b id="total">0</b><span>карточек</span></div>
+      <div class="stat"><b id="ready">0</b><span>с первой итерацией</span></div>
+      <div class="stat"><b id="need">0</b><span>нужно добавить</span></div>
+      <div class="stat"><b>3</b><span>целевые итерации на образ</span></div>
+    </div>
+  </div>
+</header>
+<div class="bar">
+  <div class="wrap tools">
+    <input id="q" placeholder="Поиск по персонажам, сценам, описаниям...">
+    <select id="f"><option>Все группы</option></select>
+    <a class="tool-link" href="./">Шотлист</a>
+    <button id="copyComments" type="button">Копировать комментарии</button>
+    <button onclick="print()" type="button">Печать / PDF</button>
+  </div>
+</div>
+<main>
+  <div class="wrap">
+    <div class="note">Крупное открытие работает по клику на картинку. Карточки и попап используют PNG-исходники из <b>assets/characters</b>. Новые варианты можно временно добавить с компьютера прямо в карточку: они сохранятся в этом браузере для обсуждения, а для общей ссылки их потом нужно добавить в папку сайта.</div>
+    <div class="note warning">Проверка финального сценария: Жағыппар, консул Шалунов, комсомольцы и китайская молодежь не добавлены как активные персонажи, потому что эти блоки удалены. Добавлены недостающие персонажные/массовочные карточки: семья Ерлана сегодня, родня у смертного ложа, мужчины у могилы, дети Айтжана в поле, одинокие кемпір-шал, ауыл жастары/келіндер. Кула ат, торый құнан, жылқы, қымыз, тау/қарағай, көшпенділер көші, Нұра/Оразақ, Құлжа/Шығыс Түркістан оставлены как визуальные активы, не персонажи.</div>
+    <div id="app"></div>
+  </div>
+</main>
+<dialog id="viewer">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title" id="viewerTitle"></div><button id="closeViewer" type="button">Закрыть</button></div>
+    <img id="viewerImg" alt="">
+  </div>
+</dialog>
+<script>
+const rows = [
+  {
+    "id": "CH-001",
+    "name": "Айтжан в силе",
+    "group": "Главные персонажи",
+    "period": "примерно 1940-е / начало 1950-х",
+    "description": "Опорный образ Айтжана: крепкий, спокойный, уважаемый глава общины, человек труда и внутренней дисциплины.",
+    "scenario": "Пролог; 1 серия «Айтжан: тірек адам»; 2 серия «Тау. Қамшы. Күш».",
+    "usage": "Сцены уважения в Карасу, помощь бедным, работа с семьей, горный блок, Кула ат, встреча с Балтақадыром.",
+    "refs": "Aitzhan.jpeg; Aitzhan 2.jpeg; Aitzhan 3-AI.jpeg",
+    "status": "3 из 3 итераций готово",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-001_Aitzhan_strong_openai_v01.png",
+        "full": "assets/characters/CH-001_Aitzhan_strong_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-001_Aitzhan_strong_openai_v02.png",
+        "full": "assets/characters/CH-001_Aitzhan_strong_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-001_Aitzhan_strong_openai_v03.png",
+        "full": "assets/characters/CH-001_Aitzhan_strong_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-002",
+    "name": "Айтжан в последние годы",
+    "group": "Главные персонажи",
+    "period": "после болезни, 1945-1955",
+    "description": "Ослабевший, но не сломленный Айтжан: лицо после болезни, короткая стрижка, сила уже не физическая, а духовная.",
+    "scenario": "3 серия «Қоштасу, аманат».",
+    "usage": "Болезнь, возвращение к труду после тифа, сцены прощания, аманат Ниетжану, сон перед уходом.",
+    "refs": "Aitzhan.jpeg; Aitzhan 2.jpeg",
+    "status": "3 из 3 итераций готово",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-002_Aitzhan_final_years_openai_v01.png",
+        "full": "assets/characters/CH-002_Aitzhan_final_years_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-002_Aitzhan_final_years_openai_v02.png",
+        "full": "assets/characters/CH-002_Aitzhan_final_years_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-002_Aitzhan_final_years_openai_v03.png",
+        "full": "assets/characters/CH-002_Aitzhan_final_years_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-003",
+    "name": "Ниетжан в детстве",
+    "group": "Главные персонажи",
+    "period": "10-14 лет",
+    "description": "Мальчик, который учится труду рядом с отцом: поле, қырман, первые наблюдения за жизнью рода.",
+    "scenario": "1 серия, сцены поля и қырман; 2 серия, бытовые блоки жайлау/жылқы/қымыз.",
+    "usage": "Работа в поле, сбор урожая, детский взгляд на мир Айтжана, летняя жизнь на жайлау.",
+    "refs": "Nietzhan-young.jpeg; Nietzhan-young2.jpeg",
+    "status": "3 из 3 итераций готово",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-003_Nietzhan_child_openai_v01.png",
+        "full": "assets/characters/CH-003_Nietzhan_child_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-003_Nietzhan_child_openai_v02.png",
+        "full": "assets/characters/CH-003_Nietzhan_child_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-003_Nietzhan_child_openai_v03.png",
+        "full": "assets/characters/CH-003_Nietzhan_child_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-004",
+    "name": "Ниетжан в 17 лет",
+    "group": "Главные персонажи",
+    "period": "17 лет",
+    "description": "Юный Ниетжан в момент взросления: принимает отцовский аманат и внутренне становится продолжателем памяти.",
+    "scenario": "3 серия «Қоштасу, аманат».",
+    "usage": "Сцена у постели Айтжана, обещание отцу, финальная линия долга и памяти.",
+    "refs": "Nietzhan-young.jpeg; Nietzhan-young2.jpeg",
+    "status": "3 из 3 итераций готово",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-004_Nietzhan_youth17_openai_v01.png",
+        "full": "assets/characters/CH-004_Nietzhan_youth17_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-004_Nietzhan_youth17_openai_v02.png",
+        "full": "assets/characters/CH-004_Nietzhan_youth17_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-004_Nietzhan_youth17_openai_v03.png",
+        "full": "assets/characters/CH-004_Nietzhan_youth17_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-005",
+    "name": "Ниетжан молодым взрослым",
+    "group": "Дополнительные версии",
+    "period": "20-25 лет",
+    "description": "Версия для возможных вставок после финального аманата: молодой человек, уже несущий ответственность за семейную память.",
+    "scenario": "В финальном сценарии напрямую почти не разыгрывается; можно использовать как переходный образ после 3 серии.",
+    "usage": "Опционально: эпилог, монтаж памяти, документы, если понадобится связка между юностью и архивным голосом.",
+    "refs": "Nietzhan-middleage*.jpeg",
+    "status": "3 из 3 итераций готово, опционально",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-005_Nietzhan_young_adult_openai_v01.png",
+        "full": "assets/characters/CH-005_Nietzhan_young_adult_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-005_Nietzhan_young_adult_openai_v02.png",
+        "full": "assets/characters/CH-005_Nietzhan_young_adult_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-005_Nietzhan_young_adult_openai_v03.png",
+        "full": "assets/characters/CH-005_Nietzhan_young_adult_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-006",
+    "name": "Ниетжан в зрелости",
+    "group": "Дополнительные версии",
+    "period": "средний возраст",
+    "description": "Архивно-документальный слой Ниетжана: человек, который уже хранит и пересказывает историю отца.",
+    "scenario": "Закадровый/архивный слой, если в монтаже нужен визуальный мост к аудио.",
+    "usage": "Опционально для перебивок с архивным голосом, семейных воспоминаний, документов.",
+    "refs": "Nietzhan-middleage.jpeg; Nietzhan-middleage2.jpeg; Nietzhan-middleage3.jpeg; Nietzhan-middleage4.jpeg",
+    "status": "3 из 3 итераций готово, опционально",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-006_Nietzhan_middle_age_openai_v01.png",
+        "full": "assets/characters/CH-006_Nietzhan_middle_age_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-006_Nietzhan_middle_age_openai_v02.png",
+        "full": "assets/characters/CH-006_Nietzhan_middle_age_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-006_Nietzhan_middle_age_openai_v03.png",
+        "full": "assets/characters/CH-006_Nietzhan_middle_age_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-007",
+    "name": "Ниетжан в старости",
+    "group": "Дополнительные версии",
+    "period": "старость",
+    "description": "Поздний образ Ниетжана как носителя памяти, ближе к архивному рассказчику.",
+    "scenario": "Закадровый/архивный слой, если нужен визуальный образ рассказчика.",
+    "usage": "Опционально: эпилог, память, семейная линия, переход к сегодняшнему Ерлану.",
+    "refs": "Nietzhan-oldage.jpeg; Nietzhan-oldage2.jpeg; Nietzhan-oldage3.jpeg; Nietzhan-oldage4.jpeg",
+    "status": "3 из 3 итераций готово, опционально",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-007_Nietzhan_old_age_openai_v01.png",
+        "full": "assets/characters/CH-007_Nietzhan_old_age_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-007_Nietzhan_old_age_openai_v02.png",
+        "full": "assets/characters/CH-007_Nietzhan_old_age_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-007_Nietzhan_old_age_openai_v03.png",
+        "full": "assets/characters/CH-007_Nietzhan_old_age_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-008",
+    "name": "Жена Айтжана / мать Ниетжана",
+    "group": "Семья",
+    "period": "средний возраст",
+    "description": "Теплый, трудовой женский образ семьи: не декоративная фигура, а часть общего быта и выживания.",
+    "scenario": "1 серия, семейный быт и работа; возможно бытовые сцены 2 серии.",
+    "usage": "Поле, дом, дети, подготовка еды, бытовые кадры рядом с Айтжаном и Ниетжаном.",
+    "refs": "NiezhanWife-middleage.jpeg; GM.jpeg",
+    "status": "3 из 3 итераций готово",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-008_Aitzhan_wife_openai_v01.png",
+        "full": "assets/characters/CH-008_Aitzhan_wife_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-008_Aitzhan_wife_openai_v02.png",
+        "full": "assets/characters/CH-008_Aitzhan_wife_openai_v02.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 3",
+        "thumb": "assets/characters/CH-008_Aitzhan_wife_openai_v03.png",
+        "full": "assets/characters/CH-008_Aitzhan_wife_openai_v03.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-009",
+    "name": "Ерлан в детстве",
+    "group": "Семья",
+    "period": "детство",
+    "description": "Семейная память в прошлом: детская версия Ерлана, которую можно использовать в мягких семейных переходах.",
+    "scenario": "В финальном сценарии не является отдельной сценой; только как возможная память внутри пролога/эпилога.",
+    "usage": "Опционально: семейные фото, мост от архивной истории к сегодняшнему рассказчику.",
+    "refs": "Erlan-kid.jpeg; Erlan-kid2.jpeg; Erlan-kid3.jpeg",
+    "status": "2 из 3 итераций готово, опционально",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-009_Erlan_child_openai_v01.png",
+        "full": "assets/characters/CH-009_Erlan_child_openai_v01.png",
+        "status": "готово"
+      },
+      {
+        "label": "Итерация 2",
+        "thumb": "assets/characters/CH-009_Erlan_child_openai_v02.png",
+        "full": "assets/characters/CH-009_Erlan_child_openai_v02.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-010",
+    "name": "Ерлан сегодня",
+    "group": "Современная рамка",
+    "period": "настоящее время",
+    "description": "Современный хранитель семейной истории: человек, через которого зритель входит в фильм. Нужен лучший референс, текущая картинка временная.",
+    "scenario": "Пролог и возможный эпилог.",
+    "usage": "Дом/комната, телефон, аудио Ниетжана, дети и внуки, переход к прошлому.",
+    "refs": "Нужны актуальные фото Ерлана",
+    "status": "временная версия, нужен референс",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-010_Erlan_present_placeholder_openai_v01.png",
+        "full": "assets/characters/CH-010_Erlan_present_placeholder_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-011",
+    "name": "Балтақадыр",
+    "group": "Второстепенные персонажи",
+    "period": "30-40 лет",
+    "description": "Человек, который оступился, но не превращен в злодея. Важна двойственность: напряжение, стыд, возможность измениться.",
+    "scenario": "2 серия «Тау. Қамшы. Күш», блок кражи жылқы.",
+    "usage": "Кража, встреча с Айтжаном, примирение с Қызай людьми, моральная сила Айтжана.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-011_Baltaqadyr_openai_v01.png",
+        "full": "assets/characters/CH-011_Baltaqadyr_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-012",
+    "name": "Ақ боз атты елес",
+    "group": "Мистические образы",
+    "period": "вневременной образ",
+    "description": "Не реалистичный персонаж, а видение-предупреждение: всадник в белом, суровый и тихий знак горы.",
+    "scenario": "2 серия, горный блок.",
+    "usage": "Предупреждение Айтжану, атмосфера таинственного тауға шығу, переход к трагедии Балтабай и Қасей.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-012_Ak_boz_atty_eles_openai_v01.png",
+        "full": "assets/characters/CH-012_Ak_boz_atty_eles_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-013",
+    "name": "Балтабай",
+    "group": "Второстепенные персонажи",
+    "period": "молодой взрослый",
+    "description": "Один из молодых людей, которые не слушают предупреждение. Нужен образ уверенности и неопытности.",
+    "scenario": "2 серия, история горы.",
+    "usage": "Решение идти на гору, драматический бытовой/мистический эпизод, последствие непослушания.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-013_Baltabai_openai_v01.png",
+        "full": "assets/characters/CH-013_Baltabai_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-014",
+    "name": "Қасей",
+    "group": "Второстепенные персонажи",
+    "period": "молодой взрослый",
+    "description": "Второй молодой человек из горной истории; должен отличаться от Балтабая лицом и темпераментом.",
+    "scenario": "2 серия, история горы.",
+    "usage": "Парная сцена с Балтабаем, нарушение запрета, драматическое последствие.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-014_Qasey_openai_v01.png",
+        "full": "assets/characters/CH-014_Qasey_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-015",
+    "name": "Қоңырқұлжа",
+    "group": "Второстепенные персонажи",
+    "period": "взрослый лекарь",
+    "description": "Лекарь/целитель, который помогает Айтжану после тифа; спокойный, опытный, без мистификации.",
+    "scenario": "3 серия, начало болезни.",
+    "usage": "Сцена лечения Айтжана, возвращение к жизни после ауыр дерт.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-015_Konyrkulzha_openai_v01.png",
+        "full": "assets/characters/CH-015_Konyrkulzha_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-016",
+    "name": "Молодой уйгурский сосед",
+    "group": "Второстепенные персонажи",
+    "period": "18-20 лет",
+    "description": "Юноша, которому снится/видится важный сон об Айтжане; нужен живой, не карикатурный, уважительный образ.",
+    "scenario": "3 серия, рассказ о сне.",
+    "usage": "Передает общине сон, помогает открыть духовный смысл ухода Айтжана.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-016_Uighur_young_neighbor_openai_v01.png",
+        "full": "assets/characters/CH-016_Uighur_young_neighbor_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-017",
+    "name": "Родители Айтжана во сне",
+    "group": "Мистические образы",
+    "period": "память / сон",
+    "description": "Тихие родительские фигуры из сна: не страшные, а зовущие и принимающие.",
+    "scenario": "3 серия, сон перед смертью.",
+    "usage": "Видение Айтжана, переход к прощанию, ощущение рода и предков.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-017_Aitzhan_parents_dream_openai_v01.png",
+        "full": "assets/characters/CH-017_Aitzhan_parents_dream_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-018",
+    "name": "Жители Карасу",
+    "group": "Массовка",
+    "period": "разные возрасты",
+    "description": "Община вокруг Айтжана: старики, женщины, дети, соседи, люди быта и взаимопомощи.",
+    "scenario": "1 серия; также отдельные сцены 3 серии.",
+    "usage": "Соғым, асар, помощь бедным, уважение к Айтжану, общинный фон, похоронная/прощальная атмосфера.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-018_Karasu_villagers_openai_v01.png",
+        "full": "assets/characters/CH-018_Karasu_villagers_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-019",
+    "name": "Қызай жігіттері",
+    "group": "Массовка",
+    "period": "взрослые мужчины",
+    "description": "Группа мужчин, требующих справедливости после кражи; важны энергия рода, напряжение и достоинство.",
+    "scenario": "2 серия, блок Балтақадыра.",
+    "usage": "Приход к Айтжану, требование наказания, сцена примирения.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-019_Qyzay_men_openai_v01.png",
+        "full": "assets/characters/CH-019_Qyzay_men_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-020",
+    "name": "Молодежь на жайлау",
+    "group": "Массовка",
+    "period": "подростки и молодые",
+    "description": "Бытовая массовка второй серии: лето, жылқы, қымыз, вечерние игры, свободная жизнь жайлау.",
+    "scenario": "2 серия, бытовые блоки про жайлау/жылқы/қымыз.",
+    "usage": "Молодежь с лошадьми, бие сауу, қымыз, вечерняя игра, бытовое дыхание серии.",
+    "refs": "Нет архивного фото",
+    "status": "1 из 3 итераций готова",
+    "iterations": [
+      {
+        "label": "Итерация 1",
+        "thumb": "assets/characters/CH-020_Jailau_youth_openai_v01.png",
+        "full": "assets/characters/CH-020_Jailau_youth_openai_v01.png",
+        "status": "готово"
+      }
+    ]
+  },
+  {
+    "id": "CH-021",
+    "name": "Семья Ерлана сегодня",
+    "group": "Нужно добавить",
+    "period": "настоящее время",
+    "description": "Дети и внуки Ерлана в современной рамке. Это даст зрителю понятную живую причину, зачем история рассказывается сейчас.",
+    "scenario": "Пролог.",
+    "usage": "Ерлан рядом с детьми/внуками, включение аудио, семейное слушание, переход к Айтжану.",
+    "refs": "Нужны современные фото семьи или генерация без портретного сходства",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "CH-022",
+    "name": "Родня у смертного ложа Айтжана",
+    "group": "Нужно добавить",
+    "period": "1950-е",
+    "description": "Бажалары, қайынбикелер, балдыздар и близкие люди у постели Айтжана. Нужна сдержанная сцена прощания.",
+    "scenario": "3 серия, сцена 2.1.",
+    "usage": "Прощание, тишина в доме, люди вокруг Айтжана, эмоциональная кульминация без перегруза.",
+    "refs": "Нет архивного фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "CH-023",
+    "name": "Мужчины у могилы",
+    "group": "Нужно добавить",
+    "period": "1955 год",
+    "description": "Группа мужчин на похоронах: уважение, сдержанность, холодный воздух, земля, молчание общины.",
+    "scenario": "3 серия, сцена 2.2.",
+    "usage": "Похоронный кадр, финальное уважение общины, переход к словам Ниетжана.",
+    "refs": "Нет архивного фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "CH-024",
+    "name": "Дети Айтжана в поле",
+    "group": "Нужно добавить",
+    "period": "1940-е / 1950-е",
+    "description": "Семейная группа детей Айтжана, чтобы сцены труда не выглядели пусто и чтобы быт был семейным, а не только индивидуальным.",
+    "scenario": "1 серия, сцена 3.2; 2 серия, бытовые блоки.",
+    "usage": "Жатва, қырман, помощь родителям, бытовые детали вокруг Айтжана и жены.",
+    "refs": "Нет архивного фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-001",
+    "name": "Кула ат",
+    "group": "Визуальные активы",
+    "period": "повторяющийся образ",
+    "description": "Главный конь Айтжана: сильный, умный, узнаваемый. Его лучше утвердить как отдельного персонажа-актива.",
+    "scenario": "2 серия: горный блок, қарағай, Балтақадыр.",
+    "usage": "Құла ат вытаскивает қарағай, возвращается домой, участвует в сценах силы и доверия.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-002",
+    "name": "Торый құнан",
+    "group": "Визуальные активы",
+    "period": "жайлау",
+    "description": "Молодой конь из бытовой линии Ниетжана; нужен для сцены, где он показывает умение держаться в седле.",
+    "scenario": "2 серия, сцена жайлау.",
+    "usage": "Ниетжан садится на торого құнана, бытовой блок про жылқы и взросление.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-003",
+    "name": "Жылқы на жайлау",
+    "group": "Визуальные активы",
+    "period": "лето",
+    "description": "Не один персонаж, а узнаваемый визуальный мир: табун, простор, движение, летний воздух.",
+    "scenario": "2 серия, бытовые блоки про жылқы и жайлау.",
+    "usage": "Переходы, Establishing shots, оживление табуна в Seedance/Kling.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-004",
+    "name": "Қымыз и бие сауу",
+    "group": "Визуальные активы",
+    "period": "летний быт",
+    "description": "Ключевой бытовой актив второй серии: женщины доят кобылиц, саба, деревянная посуда, живая деталь культуры.",
+    "scenario": "2 серия, бытовые блоки.",
+    "usage": "Вступительные дикторские слова про быт, qymyz sequence, теплые монтажные вставки.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-005",
+    "name": "Тау и қарағай",
+    "group": "Визуальные активы",
+    "period": "горный блок",
+    "description": "Гора и сосна как драматический визуальный мотив второй серии: тяжесть, высота, испытание, предупреждение.",
+    "scenario": "2 серия, горный блок.",
+    "usage": "Айтжан на горе, предупреждение, қарағай сүйреу, напряжение перед трагедией.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "CH-025",
+    "name": "Одинокие кемпір-шал",
+    "group": "Нужно добавить",
+    "period": "1940-50-е",
+    "description": "Пожилая пара без детей рядом: конкретный образ сцены ауыл ынтымағы, где община помогает тем, кто не справляется один.",
+    "scenario": "1 серия, сцена 1.3.",
+    "usage": "Дом одиноких стариков, стирка, двор, қорадағы мал; эмоциональный бытовой пример взаимопомощи.",
+    "refs": "Нет архивного фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "CH-026",
+    "name": "Ауыл жастары и келіндер",
+    "group": "Нужно добавить",
+    "period": "1940-50-е",
+    "description": "Молодые люди и келіндер из Карасу, которые приходят помогать старикам. Нужны как отдельная бытовая массовка первой серии.",
+    "scenario": "1 серия, сцена 1.3.",
+    "usage": "Помощь одиноким старикам: кто-то стирает, кто-то чистит дом, кто-то смотрит за малом.",
+    "refs": "Нет архивного фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-006",
+    "name": "Көшпенділер көші",
+    "group": "Визуальные активы",
+    "period": "Шекірті Қарасу жайлауы",
+    "description": "Кочевой переход с людьми, вещами, лошадьми и дальним пространством. Нужен для бытового блока второй серии.",
+    "scenario": "2 серия, сцена 5.1.",
+    "usage": "Көшпенділер, жылқы үйірлері, Қытай даласында көші-қой; широкий establishing shot для монтажа.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-007",
+    "name": "Нұра / Оразақ — родина Айтжана",
+    "group": "Визуальные активы",
+    "period": "1892 / память о родине",
+    "description": "Память о месте рождения Айтжана: Нұра өзені, Оразақ ауылы, Ақмола даласы. Нужен как спокойный визуальный образ истока истории.",
+    "scenario": "Пролог, дикторский текст о рождении Айтжана.",
+    "usage": "Кадр-исток перед переходом в Шығыс Түркістан; можно использовать как мягкую историческую перебивку.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  },
+  {
+    "id": "VA-008",
+    "name": "Құлжа / Шығыс Түркістан",
+    "group": "Визуальные активы",
+    "period": "1924 и далее",
+    "description": "Историческое место переселения Айтжана: Шығыс Түркістан, Құлжа, ощущение чужой земли без туристического вида.",
+    "scenario": "Пролог, дикторский текст о переселении 1924 года.",
+    "usage": "Переход из родины в жат жер; географический и эмоциональный контекст фильма.",
+    "refs": "Нет фото",
+    "status": "нужно сгенерировать 3 итерации",
+    "iterations": []
+  }
+];
+const app=document.getElementById("app"), q=document.getElementById("q"), f=document.getElementById("f"), copyComments=document.getElementById("copyComments");
+const viewer=document.getElementById("viewer"), viewerImg=document.getElementById("viewerImg"), viewerTitle=document.getElementById("viewerTitle");
+const groups=[...new Set(rows.map(r=>r.group))]; groups.forEach(x=>f.add(new Option(x,x)));
+document.getElementById("total").textContent=rows.length;
+document.getElementById("ready").textContent=rows.filter(r=>r.iterations.length).length;
+document.getElementById("need").textContent=rows.filter(r=>!r.iterations.length || /нужно|временная/.test(r.status)).length;
+function commentKey(id){return "aizhan-character-comment-"+id}
+function localIterKey(id){return "aizhan-character-extra-"+id}
+function getComment(id){try{return localStorage.getItem(commentKey(id))||""}catch(e){return ""}}
+function setComment(id,value){try{localStorage.setItem(commentKey(id),value)}catch(e){}}
+function getLocalIterations(id){try{return JSON.parse(localStorage.getItem(localIterKey(id))||"[]")}catch(e){return []}}
+function setLocalIterations(id,value){try{localStorage.setItem(localIterKey(id),JSON.stringify(value))}catch(e){}}
+function esc(value){return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+function allIterations(row){
+  const local = getLocalIterations(row.id).map((src,i)=>({label:`Локальная итерация ${i+2}`, thumb:src, full:src, status:'локально'}));
+  return [...row.iterations, ...local].slice(0,3);
+}
+function slotHtml(row, index){
+  const iter = allIterations(row)[index];
+  if(iter) return `<div class="slot"><img src="${esc(iter.thumb)}" data-full="${esc(iter.full)}" data-title="${esc(row.id+' · '+row.name+' · '+iter.label)}" alt="${esc(row.name)}"><span>${esc(iter.label)}</span></div>`;
+  return `<div class="slot">Итерация ${index+1}<br>нужно добавить</div>`;
+}
+function statusClass(row){
+  if(/нужно|временная/.test(row.status)) return 'need';
+  if(/опционально/.test(row.status)) return 'option';
+  return 'ready';
+}
+function card(row){return `<article class="card">
+  <div class="media">${[0,1,2].map(i=>slotHtml(row,i)).join('')}</div>
+  <div class="body">
+    <div class="topline"><div><div class="name">${esc(row.name)}</div><div class="small">${esc(row.period)}</div></div><div class="id">${esc(row.id)}</div></div>
+    <span class="tag">${esc(row.group)}</span>
+    <div><div class="label">Описание</div><div>${esc(row.description)}</div></div>
+    <div><div class="label">Где в сценарии</div><div>${esc(row.scenario)}</div></div>
+    <div><div class="label">Как использовать</div><div class="small">${esc(row.usage)}</div></div>
+    <div><div class="label">Референсы</div><div class="small">${esc(row.refs)}</div></div>
+    <div><div class="label">Статус</div><div class="status ${statusClass(row)}">${esc(row.status)}</div></div>
+    <div class="add-row">
+      <label class="file-btn">Добавить итерацию локально<input type="file" accept="image/*" data-file="${esc(row.id)}"></label>
+      <button type="button" data-clear="${esc(row.id)}">Очистить локальные</button>
+    </div>
+    <div class="comment">
+      <div class="label">Комментарий редактора / утверждение</div>
+      <textarea data-comment="${esc(row.id)}" placeholder="Например: оставить, сделать старше, ближе к фото, изменить костюм...">${esc(getComment(row.id))}</textarea>
+      <div class="saved" id="saved-${esc(row.id)}"></div>
+    </div>
+  </div>
+</article>`}
+function render(){
+  const s=q.value.toLowerCase();
+  const filtered=rows.filter(r=>(f.value==="Все группы"||r.group===f.value)&&Object.values(r).join(" ").toLowerCase().includes(s));
+  const byGroup=groups.map(g=>[g, filtered.filter(r=>r.group===g)]).filter(([,items])=>items.length);
+  app.innerHTML=byGroup.map(([g,items])=>`<h2>${esc(g)}</h2><div class="grid">${items.map(card).join('')}</div>`).join('') || '<div class="empty">Ничего не найдено.</div>';
+}
+q.oninput=render; f.onchange=render; render();
+app.addEventListener("click", e=>{
+  const img=e.target.closest('img[data-full]');
+  if(img){viewerImg.src=img.dataset.full; viewerImg.alt=img.dataset.title; viewerTitle.textContent=img.dataset.title; viewer.showModal(); return;}
+  const clear=e.target.closest('[data-clear]');
+  if(clear){setLocalIterations(clear.dataset.clear,[]); render();}
+});
+document.getElementById('closeViewer').onclick=()=>viewer.close();
+viewer.addEventListener('click', e=>{ if(e.target===viewer) viewer.close(); });
+app.addEventListener("input", e=>{
+  const id=e.target.dataset.comment;
+  if(!id) return;
+  setComment(id, e.target.value);
+  const saved=document.getElementById("saved-"+id);
+  if(saved){saved.textContent="Сохранено в этом браузере"; clearTimeout(saved.timer); saved.timer=setTimeout(()=>saved.textContent="",1200);}
+});
+app.addEventListener('change', e=>{
+  const id=e.target.dataset.file;
+  const file=e.target.files && e.target.files[0];
+  if(!id || !file) return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const current=getLocalIterations(id);
+    current.push(reader.result);
+    setLocalIterations(id,current.slice(-2));
+    render();
+  };
+  reader.readAsDataURL(file);
+});
+copyComments.onclick=async()=>{
+  const text=rows.map(r=>{ const value=getComment(r.id).trim(); return value ? `${r.id} ${r.name}: ${value}` : ""; }).filter(Boolean).join("\n");
+  const payload=text||"Комментариев пока нет.";
+  try{await navigator.clipboard.writeText(payload); copyComments.textContent="Скопировано";}
+  catch(e){copyComments.textContent="Не скопировано";}
+  setTimeout(()=>copyComments.textContent="Копировать комментарии",1400);
+};
+</script>
+</body>
+</html>

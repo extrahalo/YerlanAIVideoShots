@@ -92,12 +92,12 @@
 
     .toolbar-inner {
       display: grid;
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto auto auto;
       gap: 10px;
       align-items: center;
     }
 
-    input[type="search"], select, button {
+    input[type="search"], select, button, .toolbar-link {
       min-height: 40px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -111,7 +111,7 @@
       padding: 0 12px;
     }
 
-    select, button {
+    select, button, .toolbar-link {
       padding: 0 12px;
     }
 
@@ -120,6 +120,17 @@
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
+    }
+
+    .toolbar-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-2);
+      border-color: var(--accent-2);
+      color: #fff;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
     main {
@@ -287,6 +298,11 @@
     <div class="wrap">
       <h1>«Айтжан. Мұра» — шотлист для чернового монтажа</h1>
       <p class="subtitle">Страница для сборки первого монтажного скелета: подставляем архивный звук, дикторский текст и статичные изображения в линию, затем выбранные кадры оживляем через Seedance/Kling.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+        <a href="./" style="background:#7b4b2a;color:#fff;text-decoration:none;border-radius:8px;padding:9px 12px">Шотлист</a>
+        <a href="characters.html" style="background:#7b4b2a;color:#fff;text-decoration:none;border-radius:8px;padding:9px 12px">Персонажи</a>
+        <a href="https://github.com/extrahalo/YerlanAIVideoShots" style="background:#7b4b2a;color:#fff;text-decoration:none;border-radius:8px;padding:9px 12px">GitHub</a>
+      </div>
       <div class="stats">
         <div class="stat"><strong id="shotCount">0</strong><span>изображений / шотов</span></div>
         <div class="stat"><strong>5-10 сек</strong><span>ориентир на один клип</span></div>
@@ -302,6 +318,7 @@
       <select id="sectionFilter" aria-label="Фильтр по разделам">
         <option value="all">Все части</option>
       </select>
+      <a class="toolbar-link" href="characters.html">Персонажи</a>
       <button id="printBtn" type="button">Печать / PDF</button>
     </div>
   </div>
