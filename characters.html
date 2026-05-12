@@ -90,13 +90,13 @@
     <input id="q" placeholder="Поиск по персонажам, сценам, описаниям...">
     <select id="f"><option>Все группы</option></select>
     <a class="tool-link" href="./">Шотлист</a>
-    <button id="copyComments" type="button">Копировать комментарии</button>
+    <button id="copyComments" type="button">Все обсуждения GitHub</button>
     <button onclick="print()" type="button">Печать / PDF</button>
   </div>
 </div>
 <main>
   <div class="wrap">
-    <div class="note">Крупное открытие работает по клику на картинку. Карточки и попап используют PNG-исходники из <b>assets/characters</b>. Новые варианты можно временно добавить с компьютера прямо в карточку: они сохранятся в этом браузере для обсуждения, а для общей ссылки их потом нужно добавить в папку сайта.</div>
+    <div class="note">Крупное открытие работает по клику на картинку. Карточки и попап используют PNG-исходники из <b>assets/characters</b>. Командные комментарии теперь ведутся через GitHub Issues и доступны всем по общей ссылке. Локально по-прежнему можно временно добавлять новые варианты с компьютера прямо в карточку до следующей публикации.</div>
     <div class="note warning">Проверка финального сценария: Жағыппар, консул Шалунов, комсомольцы и китайская молодежь не добавлены как активные персонажи, потому что эти блоки удалены. Добавлены недостающие персонажные/массовочные карточки: семья Ерлана сегодня, родня у смертного ложа, мужчины у могилы, дети Айтжана в поле, одинокие кемпір-шал, ауыл жастары/келіндер. Кула ат, торый құнан, жылқы, қымыз, тау/қарағай, көшпенділер көші, Нұра/Оразақ, Құлжа/Шығыс Түркістан оставлены как визуальные активы, не персонажи.</div>
     <div id="app"></div>
   </div>
@@ -895,6 +895,30 @@ const rows = [
     "iterations": []
   }
 ];
+const issueLinks = {
+  "CH-001": "https://github.com/extrahalo/YerlanAIVideoShots/issues/1",
+  "CH-002": "https://github.com/extrahalo/YerlanAIVideoShots/issues/2",
+  "CH-003": "https://github.com/extrahalo/YerlanAIVideoShots/issues/3",
+  "CH-004": "https://github.com/extrahalo/YerlanAIVideoShots/issues/4",
+  "CH-005": "https://github.com/extrahalo/YerlanAIVideoShots/issues/5",
+  "CH-008": "https://github.com/extrahalo/YerlanAIVideoShots/issues/6",
+  "CH-011": "https://github.com/extrahalo/YerlanAIVideoShots/issues/7",
+  "CH-012": "https://github.com/extrahalo/YerlanAIVideoShots/issues/8",
+  "CH-013": "https://github.com/extrahalo/YerlanAIVideoShots/issues/9",
+  "CH-014": "https://github.com/extrahalo/YerlanAIVideoShots/issues/10",
+  "CH-015": "https://github.com/extrahalo/YerlanAIVideoShots/issues/11",
+  "CH-016": "https://github.com/extrahalo/YerlanAIVideoShots/issues/12",
+  "CH-017": "https://github.com/extrahalo/YerlanAIVideoShots/issues/13",
+  "CH-018": "https://github.com/extrahalo/YerlanAIVideoShots/issues/14",
+  "CH-019": "https://github.com/extrahalo/YerlanAIVideoShots/issues/15",
+  "CH-020": "https://github.com/extrahalo/YerlanAIVideoShots/issues/16",
+  "CH-022": "https://github.com/extrahalo/YerlanAIVideoShots/issues/17",
+  "CH-023": "https://github.com/extrahalo/YerlanAIVideoShots/issues/18",
+  "CH-024": "https://github.com/extrahalo/YerlanAIVideoShots/issues/19",
+  "CH-025": "https://github.com/extrahalo/YerlanAIVideoShots/issues/20",
+  "CH-026": "https://github.com/extrahalo/YerlanAIVideoShots/issues/21"
+};
+
 const app=document.getElementById("app"), q=document.getElementById("q"), f=document.getElementById("f"), copyComments=document.getElementById("copyComments");
 const viewer=document.getElementById("viewer"), viewerImg=document.getElementById("viewerImg"), viewerTitle=document.getElementById("viewerTitle");
 const groups=[...new Set(rows.map(r=>r.group))]; groups.forEach(x=>f.add(new Option(x,x)));
@@ -937,9 +961,11 @@ function card(row){return `<article class="card">
       <button type="button" data-clear="${esc(row.id)}">Очистить локальные</button>
     </div>
     <div class="comment">
-      <div class="label">Комментарий редактора / утверждение</div>
-      <textarea data-comment="${esc(row.id)}" placeholder="Например: оставить, сделать старше, ближе к фото, изменить костюм...">${esc(getComment(row.id))}</textarea>
-      <div class="saved" id="saved-${esc(row.id)}"></div>
+      <div class="label">Онлайн-обсуждение</div>
+      <div class="small">Комментарии по этой карточке сохраняются в GitHub и доступны всей команде.</div>
+      <div class="add-row">
+        <a class="tool-link" href="${esc(issueLinks[row.id] || 'https://github.com/extrahalo/YerlanAIVideoShots/issues')}" target="_blank" rel="noreferrer">Открыть обсуждение</a>
+      </div>
     </div>
   </div>
 </article>`}
@@ -978,12 +1004,8 @@ app.addEventListener('change', e=>{
   };
   reader.readAsDataURL(file);
 });
-copyComments.onclick=async()=>{
-  const text=rows.map(r=>{ const value=getComment(r.id).trim(); return value ? `${r.id} ${r.name}: ${value}` : ""; }).filter(Boolean).join("\n");
-  const payload=text||"Комментариев пока нет.";
-  try{await navigator.clipboard.writeText(payload); copyComments.textContent="Скопировано";}
-  catch(e){copyComments.textContent="Не скопировано";}
-  setTimeout(()=>copyComments.textContent="Копировать комментарии",1400);
+copyComments.onclick=()=>{
+  window.open("https://github.com/extrahalo/YerlanAIVideoShots/issues?q=is%3Aissue+is%3Aopen+label%3Acharacter-feedback", "_blank", "noreferrer");
 };
 </script>
 </body>
