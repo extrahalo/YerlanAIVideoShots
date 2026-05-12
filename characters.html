@@ -46,8 +46,19 @@
     .status{font-weight:800}
     .status.ready{color:var(--green)} .status.need{color:var(--red)} .status.option{color:var(--amber)}
     .comment{margin-top:auto}
-    textarea{width:100%;min-height:70px;resize:vertical;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;padding:10px 12px}
-    .saved{font-size:12px;color:var(--green);margin-top:4px;min-height:18px}
+    .comment-form{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+    .comment-form input,.comment-form textarea{width:100%;min-height:38px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);font:inherit;padding:10px 12px}
+    .comment-form textarea{min-height:78px;resize:vertical}
+    .comment-form .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .comment-list{display:grid;gap:8px;margin-top:10px}
+    .comment-item{border:1px solid var(--line);border-radius:8px;background:#fbf8f1;padding:10px 12px}
+    .comment-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+    .comment-author{font-weight:800}
+    .comment-date{font-size:12px;color:var(--muted)}
+    .comment-body{white-space:pre-wrap;margin-top:6px}
+    .comment-empty{font-size:13px;color:var(--muted);border:1px dashed #cbbba8;border-radius:8px;padding:10px 12px;background:#fbf8f1}
+    .comment-status{font-size:12px;color:var(--green);min-height:18px}
+    .comment-status.error{color:var(--red)}
     .add-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
     .file-btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:8px;background:#fbf8f1;min-height:34px;padding:0 10px;font-size:13px;font-weight:700;cursor:pointer}
     .file-btn input{display:none}
@@ -90,13 +101,13 @@
     <input id="q" placeholder="Поиск по персонажам, сценам, описаниям...">
     <select id="f"><option>Все группы</option></select>
     <a class="tool-link" href="./">Шотлист</a>
-    <button id="copyComments" type="button">Все обсуждения GitHub</button>
+    <button id="copyComments" type="button">Обновить комментарии</button>
     <button onclick="print()" type="button">Печать / PDF</button>
   </div>
 </div>
 <main>
   <div class="wrap">
-    <div class="note">Крупное открытие работает по клику на картинку. Карточки и попап используют PNG-исходники из <b>assets/characters</b>. Командные комментарии теперь ведутся через GitHub Issues и доступны всем по общей ссылке. Локально по-прежнему можно временно добавлять новые варианты с компьютера прямо в карточку до следующей публикации.</div>
+    <div class="note">Крупное открытие работает по клику на картинку. Карточки и попап используют PNG-исходники из <b>assets/characters</b>. Комментарии теперь можно оставлять прямо на странице без GitHub-аккаунта: они сохраняются онлайн в общей Supabase-базе. Локально по-прежнему можно временно добавлять новые варианты с компьютера прямо в карточку до следующей публикации.</div>
     <div class="note warning">Проверка финального сценария: Жағыппар, консул Шалунов, комсомольцы и китайская молодежь не добавлены как активные персонажи, потому что эти блоки удалены. Добавлены недостающие персонажные/массовочные карточки: семья Ерлана сегодня, родня у смертного ложа, мужчины у могилы, дети Айтжана в поле, одинокие кемпір-шал, ауыл жастары/келіндер. Кула ат, торый құнан, жылқы, қымыз, тау/қарағай, көшпенділер көші, Нұра/Оразақ, Құлжа/Шығыс Түркістан оставлены как визуальные активы, не персонажи.</div>
     <div id="app"></div>
   </div>
@@ -895,43 +906,20 @@ const rows = [
     "iterations": []
   }
 ];
-const issueLinks = {
-  "CH-001": "https://github.com/extrahalo/YerlanAIVideoShots/issues/1",
-  "CH-002": "https://github.com/extrahalo/YerlanAIVideoShots/issues/2",
-  "CH-003": "https://github.com/extrahalo/YerlanAIVideoShots/issues/3",
-  "CH-004": "https://github.com/extrahalo/YerlanAIVideoShots/issues/4",
-  "CH-005": "https://github.com/extrahalo/YerlanAIVideoShots/issues/5",
-  "CH-008": "https://github.com/extrahalo/YerlanAIVideoShots/issues/6",
-  "CH-011": "https://github.com/extrahalo/YerlanAIVideoShots/issues/7",
-  "CH-012": "https://github.com/extrahalo/YerlanAIVideoShots/issues/8",
-  "CH-013": "https://github.com/extrahalo/YerlanAIVideoShots/issues/9",
-  "CH-014": "https://github.com/extrahalo/YerlanAIVideoShots/issues/10",
-  "CH-015": "https://github.com/extrahalo/YerlanAIVideoShots/issues/11",
-  "CH-016": "https://github.com/extrahalo/YerlanAIVideoShots/issues/12",
-  "CH-017": "https://github.com/extrahalo/YerlanAIVideoShots/issues/13",
-  "CH-018": "https://github.com/extrahalo/YerlanAIVideoShots/issues/14",
-  "CH-019": "https://github.com/extrahalo/YerlanAIVideoShots/issues/15",
-  "CH-020": "https://github.com/extrahalo/YerlanAIVideoShots/issues/16",
-  "CH-022": "https://github.com/extrahalo/YerlanAIVideoShots/issues/17",
-  "CH-023": "https://github.com/extrahalo/YerlanAIVideoShots/issues/18",
-  "CH-024": "https://github.com/extrahalo/YerlanAIVideoShots/issues/19",
-  "CH-025": "https://github.com/extrahalo/YerlanAIVideoShots/issues/20",
-  "CH-026": "https://github.com/extrahalo/YerlanAIVideoShots/issues/21"
-};
-
 const app=document.getElementById("app"), q=document.getElementById("q"), f=document.getElementById("f"), copyComments=document.getElementById("copyComments");
 const viewer=document.getElementById("viewer"), viewerImg=document.getElementById("viewerImg"), viewerTitle=document.getElementById("viewerTitle");
+const SUPABASE_URL="https://gcnxmlympqykhwcufcqx.supabase.co";
+const SUPABASE_KEY="sb_publishable_hPe1_roMwgGfnt1tCagChg_4UbnGUGm";
+const COMMENTS_ENDPOINT=`${SUPABASE_URL}/rest/v1/character_comments`;
 const groups=[...new Set(rows.map(r=>r.group))]; groups.forEach(x=>f.add(new Option(x,x)));
 document.getElementById("total").textContent=rows.length;
 document.getElementById("ready").textContent=rows.filter(r=>r.iterations.length).length;
 document.getElementById("need").textContent=rows.filter(r=>!r.iterations.length || /нужно|временная/.test(r.status)).length;
-function commentKey(id){return "aizhan-character-comment-"+id}
 function localIterKey(id){return "aizhan-character-extra-"+id}
-function getComment(id){try{return localStorage.getItem(commentKey(id))||""}catch(e){return ""}}
-function setComment(id,value){try{localStorage.setItem(commentKey(id),value)}catch(e){}}
 function getLocalIterations(id){try{return JSON.parse(localStorage.getItem(localIterKey(id))||"[]")}catch(e){return []}}
 function setLocalIterations(id,value){try{localStorage.setItem(localIterKey(id),JSON.stringify(value))}catch(e){}}
 function esc(value){return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]))}
+const state={commentsById:{}, loadingComments:false};
 function allIterations(row){
   const local = getLocalIterations(row.id).map((src,i)=>({label:`Локальная итерация ${i+2}`, thumb:src, full:src, status:'локально'}));
   return [...row.iterations, ...local].slice(0,3);
@@ -945,6 +933,14 @@ function statusClass(row){
   if(/нужно|временная/.test(row.status)) return 'need';
   if(/опционально/.test(row.status)) return 'option';
   return 'ready';
+}
+function formatDate(value){
+  try{return new Date(value).toLocaleString('ru-RU',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}catch(e){return value||''}
+}
+function commentsHtml(row){
+  const items=state.commentsById[row.id]||[];
+  if(!items.length) return '<div class="comment-empty">Пока нет комментариев.</div>';
+  return `<div class="comment-list">${items.map(item=>`<div class="comment-item"><div class="comment-head"><div class="comment-author">${esc(item.author_name)}</div><div class="comment-date">${esc(formatDate(item.created_at))}</div></div><div class="comment-body">${esc(item.body)}</div></div>`).join('')}</div>`;
 }
 function card(row){return `<article class="card">
   <div class="media">${[0,1,2].map(i=>slotHtml(row,i)).join('')}</div>
@@ -961,36 +957,60 @@ function card(row){return `<article class="card">
       <button type="button" data-clear="${esc(row.id)}">Очистить локальные</button>
     </div>
     <div class="comment">
-      <div class="label">Онлайн-обсуждение</div>
-      <div class="small">Комментарии по этой карточке сохраняются в GitHub и доступны всей команде.</div>
-      <div class="add-row">
-        <a class="tool-link" href="${esc(issueLinks[row.id] || 'https://github.com/extrahalo/YerlanAIVideoShots/issues')}" target="_blank" rel="noreferrer">Открыть обсуждение</a>
+      <div class="label">Комментарии</div>
+      <div class="small">Комментарии сохраняются онлайн и видны всем без отдельного входа.</div>
+      <form class="comment-form" data-comment-form="${esc(row.id)}">
+        <input name="author_name" maxlength="80" placeholder="Ваше имя" required>
+        <textarea name="body" maxlength="2000" placeholder="Оставьте комментарий по персонажу..." required></textarea>
+        <div class="row">
+          <button type="submit">Отправить комментарий</button>
+          <div class="comment-status" id="comment-status-${esc(row.id)}"></div>
+        </div>
+      </form>
+      <div class="comment-actions">
+        <button type="button" data-refresh-comments="${esc(row.id)}">Обновить комментарии</button>
       </div>
+      <div id="comments-${esc(row.id)}">${commentsHtml(row)}</div>
     </div>
   </div>
 </article>`}
+async function loadComments(){
+  state.loadingComments=true;
+  try{
+    const res=await fetch(`${COMMENTS_ENDPOINT}?select=character_id,author_name,body,created_at&order=created_at.desc`,{
+      headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows=await res.json();
+    const grouped={};
+    rows.forEach(item=>{(grouped[item.character_id] ||= []).push(item);});
+    state.commentsById=grouped;
+  } catch(e){
+    console.error('comments load failed', e);
+  } finally {
+    state.loadingComments=false;
+  }
+}
 function render(){
   const s=q.value.toLowerCase();
   const filtered=rows.filter(r=>(f.value==="Все группы"||r.group===f.value)&&Object.values(r).join(" ").toLowerCase().includes(s));
   const byGroup=groups.map(g=>[g, filtered.filter(r=>r.group===g)]).filter(([,items])=>items.length);
   app.innerHTML=byGroup.map(([g,items])=>`<h2>${esc(g)}</h2><div class="grid">${items.map(card).join('')}</div>`).join('') || '<div class="empty">Ничего не найдено.</div>';
 }
-q.oninput=render; f.onchange=render; render();
+q.oninput=render; f.onchange=render;
 app.addEventListener("click", e=>{
   const img=e.target.closest('img[data-full]');
   if(img){viewerImg.src=img.dataset.full; viewerImg.alt=img.dataset.title; viewerTitle.textContent=img.dataset.title; viewer.showModal(); return;}
+  const refresh=e.target.closest('[data-refresh-comments]');
+  if(refresh){
+    loadComments().then(render);
+    return;
+  }
   const clear=e.target.closest('[data-clear]');
   if(clear){setLocalIterations(clear.dataset.clear,[]); render();}
 });
 document.getElementById('closeViewer').onclick=()=>viewer.close();
 viewer.addEventListener('click', e=>{ if(e.target===viewer) viewer.close(); });
-app.addEventListener("input", e=>{
-  const id=e.target.dataset.comment;
-  if(!id) return;
-  setComment(id, e.target.value);
-  const saved=document.getElementById("saved-"+id);
-  if(saved){saved.textContent="Сохранено в этом браузере"; clearTimeout(saved.timer); saved.timer=setTimeout(()=>saved.textContent="",1200);}
-});
 app.addEventListener('change', e=>{
   const id=e.target.dataset.file;
   const file=e.target.files && e.target.files[0];
@@ -1004,9 +1024,41 @@ app.addEventListener('change', e=>{
   };
   reader.readAsDataURL(file);
 });
-copyComments.onclick=()=>{
-  window.open("https://github.com/extrahalo/YerlanAIVideoShots/issues?q=is%3Aissue+is%3Aopen+label%3Acharacter-feedback", "_blank", "noreferrer");
-};
+app.addEventListener('submit', async e=>{
+  const form=e.target.closest('[data-comment-form]');
+  if(!form) return;
+  e.preventDefault();
+  const id=form.dataset.commentForm;
+  const status=document.getElementById(`comment-status-${id}`);
+  const data=new FormData(form);
+  const author_name=String(data.get('author_name')||'').trim();
+  const body=String(data.get('body')||'').trim();
+  if(!author_name || !body) return;
+  status.textContent='Сохраняем...';
+  status.classList.remove('error');
+  try{
+    const res=await fetch(COMMENTS_ENDPOINT,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        apikey:SUPABASE_KEY,
+        Authorization:`Bearer ${SUPABASE_KEY}`,
+        Prefer:'return=minimal'
+      },
+      body:JSON.stringify({character_id:id, author_name, body})
+    });
+    if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    form.reset();
+    await loadComments();
+    render();
+  } catch(err){
+    console.error('comment submit failed', err);
+    status.textContent='Не удалось сохранить комментарий';
+    status.classList.add('error');
+  }
+});
+copyComments.onclick=()=>loadComments().then(render);
+loadComments().then(render);
 </script>
 </body>
 </html>
