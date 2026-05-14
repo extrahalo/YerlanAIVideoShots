@@ -41,6 +41,9 @@
     .style-tag{display:inline-flex;width:max-content;align-items:center;border-radius:999px;background:#231b15;color:#fff;font-size:12px;font-weight:900;padding:4px 8px}
     .style-tag.photo{background:#5c5a52}
     .style-tag.paint{background:#7b4b2a}
+    .prompt-box{display:grid;gap:10px;margin:0 14px 14px;padding:12px;border:1px solid #d3c7b8;border-radius:8px;background:#fffaf2}
+    .prompt-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+    .prompt-text{white-space:pre-wrap;color:#3b332b;font-size:14px}
     .small{color:var(--muted);font-size:13px}
     .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
     .ghost{background:#fff;color:var(--brown);border-color:var(--line)}
@@ -71,10 +74,10 @@
       <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
     </nav>
     <div class="stats">
-      <div class="stat"><b>3</b><span>выбранных шота</span></div>
-      <div class="stat"><b>6</b><span>PNG-версий</span></div>
+      <div class="stat"><b>8</b><span>выбранных шотов</span></div>
+      <div class="stat"><b>16</b><span>PNG-версий</span></div>
       <div class="stat"><b>v02/v03</b><span>стили для выбора</span></div>
-      <div class="stat"><b>16:9</b><span>формат под видео</span></div>
+      <div class="stat"><b>8</b><span>video prompts</span></div>
     </div>
   </div>
 </header>
@@ -100,6 +103,7 @@ const shots = [
     scenario:"Құла ат үлкен қарағайды сүйреп келеді.",
     description:"Құла ат тянет тяжелый ствол қарағай по горному склону; Айтжан спокойно ведет коня рядом.",
     animation:"Главный action-shot блока: медленный проход коня, натяжение упряжи, движение ствола по камням.",
+    videoPrompt:"Animate a strong pale-tan horse slowly pulling a heavy pine trunk down a rocky mountain slope. Keep the movement realistic and heavy: subtle horse steps, taut ropes, the log scraping over stones, cold mist drifting through pine trees. Add a slow cinematic push-in, natural parallax in the snowy mountain background, no modern objects, no text, no fantasy effects.",
     variants:[
       {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-001_Qaragai_suyreu_v02.png",note:"Архивная документальная версия: холодная гора, зерно пленки, реалистичная тяжесть."},
       {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-001_Qaragai_suyreu_v03.png",note:"Живописная версия: сильный силуэт коня, широкие мазки, эпичнее для эмоционального монтажа."}
@@ -113,6 +117,7 @@ const shots = [
     scenario:"Ең кем дегенде, бір 40-50 үйден қымыз ішесің.",
     description:"Люди на жайлау пьют қымыз, разговаривают у юрт; на фоне табуны и вечерняя летняя долина.",
     animation:"Тихий бытовой кадр: легкий дым, жесты рук, небольшое движение людей и табуна на дальнем плане.",
+    videoPrompt:"Animate a calm 1950s Kazakh jailau gathering. People sit near yurts and drink qymyz from bowls, with small natural hand gestures and quiet conversation. Add gentle smoke from the hearth, horses slowly moving in the background, warm evening wind in the grass, subtle camera drift, no modern objects, no text, documentary realism.",
     variants:[
       {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-002_Qymyz_ishu_v02.png",note:"Фотореалистичная бытовая версия: ощущение восстановленного архива и настоящего жайлау."},
       {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-002_Qymyz_ishu_v03.png",note:"Теплая живописная версия: золотой вечер, фактура акрила, сильнее ощущение семейной памяти."}
@@ -126,9 +131,80 @@ const shots = [
     scenario:"Онда құшақтап, бетімді сүйді.",
     description:"Айтжан обнимает молодого Ниетжана у постели; аманат передается через тихий жест отца и сына.",
     animation:"Кульминационный эмоциональный кадр: медленный push-in, мерцание керосиновой лампы, почти неподвижные лица.",
+    videoPrompt:"Animate an intimate farewell inside a dark rural Kazakh room. Elderly Aitzhan embraces young Nietzhan near the bed and gently kisses his face. Keep movement minimal and respectful: slight breathing, trembling hands, soft kerosene lamp flicker, relatives almost still in the shadows, very slow push-in, no melodrama, no modern objects, no text.",
     variants:[
       {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-003_Qushaqtau_v02.png",note:"Документальная интимность: реалистичный свет лампы, спокойная сила прощания."},
       {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-003_Qushaqtau_v03.png",note:"Живописная кульминация: плотная фактура, теплый свет, сцена выглядит как память рода."}
+    ]
+  },
+  {
+    id:"FS-004",
+    source:"P-05",
+    title:"Нұра бойы",
+    section:"Пролог",
+    scenario:"Бұл хикая — Сүттібайдың ұлы Айтжан туралы...",
+    description:"Переход из современности в память: Нұра өзені, степь, distant ancestral settlement, начало семейной истории.",
+    animation:"Медленный dissolve/параллакс: река ведет взгляд к далекому селу, легкий ветер и утренний туман.",
+    videoPrompt:"Animate a quiet ancestral steppe landscape by the Nura river. Use a slow dissolve-like camera move from the river foreground toward a small distant Kazakh settlement. Add gentle morning haze, wind moving through low grass, soft light on the water, subtle parallax in the hills and sky. No modern roads, no cars, no power lines, no text.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-004_Nura_memory_v02.png",note:"Архивный образ истока: река, степь и память о родовой земле."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-004_Nura_memory_v03.png",note:"Живописная версия: мягкий рассвет, крупная память пространства, спокойный вход в историю."}
+    ]
+  },
+  {
+    id:"FS-005",
+    source:"1-20",
+    title:"Қол орақ",
+    section:"Серия 1 — «Айтжан: тірек адам»",
+    scenario:"Күзгі егін алқабы. Қол орақтармен орап жатыр.",
+    description:"Айтжан, жена и дети вручную жнут зерно серпами; семейный труд, фактура земли и хлеба.",
+    animation:"Медленный ритм ручной работы: серпы, колосья, ветер в поле, короткий боковой проезд.",
+    videoPrompt:"Animate an autumn harvest field in the 1940s-1950s. Aitzhan, his wife, and children cut grain by hand with sickles. Keep the action slow and believable: repeated harvesting gestures, grain moving in the wind, dust and dry grass, subtle side-tracking camera movement, layered field parallax. No tractors, no modern tools, no text.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-005_Qol_oraq_v02.png",note:"Документальный трудовой кадр: поле, семья, ручная жатва."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-005_Qol_oraq_v03.png",note:"Живописная версия: золотая жатва и образ семейной выносливости."}
+    ]
+  },
+  {
+    id:"FS-006",
+    source:"2-06",
+    title:"Ақ елес",
+    section:"Серия 2 — «Тау. Қамшы. Күш»",
+    scenario:"Тұман. Таудың қапталында ақбоз атты ақ киімді адам пайда болды.",
+    description:"В горном тумане появляется белая фигура на белом коне; тревожный знак без фэнтези-эффекта.",
+    animation:"Движение тумана, почти неподвижная фигура, маленький Айтжан внизу кадра, медленное раскрытие силуэта.",
+    videoPrompt:"Animate a restrained omen in a cold mountain fog. A white-clad rider on a pale horse slowly emerges on the upper slope while Aitzhan stands lower in the frame. Keep it grounded and quiet: drifting fog, subtle horse breath, slow reveal of the silhouette, slight camera hold, no glowing magic, no horror, no text, no fantasy effects.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-006_Aq_eles_v02.png",note:"Архивная, почти документальная версия видения в тумане."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-006_Aq_eles_v03.png",note:"Живописная версия: холодный туман, силуэт, сдержанное предчувствие."}
+    ]
+  },
+  {
+    id:"FS-007",
+    source:"2-25",
+    title:"Дос болайық",
+    section:"Серия 2 — «Тау. Қамшы. Күш»",
+    scenario:"Сен ұрлықты қой, екеуіміз дос болайық. Адал кәсіп істе.",
+    description:"Айтжан протягивает руку Балтақадыру: сила сцены в милости, а не в наказании.",
+    animation:"Медленный push-in на руку и лица, ветер в степи, сдержанная реакция Балтақадыра.",
+    videoPrompt:"Animate a moral turning point on the open steppe. Aitzhan calmly extends his hand to Baltaqadyr, offering peace and an honest life. Keep the motion restrained: a slow push-in toward the extended hand, small changes in facial expression, wind in clothing and dry grass, horses shifting in the far background. No fight choreography, no blood, no text.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-007_Dos_bolaiyq_v02.png",note:"Фотореалистичная версия морального выбора: жест руки в центре."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-007_Dos_bolaiyq_v03.png",note:"Живописная версия: сильный силуэт, теплый свет и момент примирения."}
+    ]
+  },
+  {
+    id:"FS-008",
+    source:"3-15",
+    title:"Айтжанның түсі",
+    section:"Серия 3 — «Қоштасу, аманат»",
+    scenario:"Кадр ауысады - Айтжанның түсі.",
+    description:"Сон Айтжана: родители зовут его из тихого пространства памяти; принятие ухода без фэнтези.",
+    animation:"Мягкий dissolve, медленное движение по тропе, туман и свет рассвета, почти неподвижные фигуры.",
+    videoPrompt:"Animate Aitzhan's dream as a quiet ancestral memory. Elderly Aitzhan faces his parents in the distance across a dawn steppe path. Use a very slow forward drift, soft morning mist, subtle movement in clothing and grass, gentle light changes in the sky. Keep it spiritual but grounded: no halos, no fantasy glow, no supernatural effects, no text.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-008_Aitzhan_dream_v02.png",note:"Сдержанная архивная версия сна: реалистичный рассвет и тихое принятие."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-008_Aitzhan_dream_v03.png",note:"Живописная версия: мягкая память, путь, родители и свет рассвета."}
     ]
   }
 ];
@@ -161,6 +237,18 @@ function variantCard(shot, variant){
   `;
 }
 
+function promptBox(shot){
+  return `
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div><span class="label">Seedance / Kling video prompt</span><strong>English animation prompt</strong></div>
+        <button class="button green copy-prompt" type="button" data-prompt="${esc(shot.videoPrompt)}">Копировать prompt</button>
+      </div>
+      <div class="prompt-text">${esc(shot.videoPrompt)}</div>
+    </div>
+  `;
+}
+
 app.innerHTML = shots.map(shot => `
   <section class="shot">
     <div class="shot-head">
@@ -179,6 +267,7 @@ app.innerHTML = shots.map(shot => `
     <div class="variants">
       ${shot.variants.map(variant => variantCard(shot, variant)).join("")}
     </div>
+    ${promptBox(shot)}
   </section>
 `).join("");
 
@@ -193,6 +282,25 @@ document.querySelectorAll(".image-button").forEach(button => {
 document.getElementById("closeViewer").addEventListener("click", () => viewer.close());
 viewer.addEventListener("click", event => {
   if (event.target === viewer) viewer.close();
+});
+document.querySelectorAll(".copy-prompt").forEach(button => {
+  button.addEventListener("click", async () => {
+    const original = button.textContent;
+    try {
+      await navigator.clipboard.writeText(button.dataset.prompt);
+      button.textContent = "Скопировано";
+      setTimeout(() => { button.textContent = original; }, 1400);
+    } catch (err) {
+      const area = document.createElement("textarea");
+      area.value = button.dataset.prompt;
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+      button.textContent = "Скопировано";
+      setTimeout(() => { button.textContent = original; }, 1400);
+    }
+  });
 });
 </script>
 </body>
