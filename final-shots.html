@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Айтжан. Мұра — финальные шоты</title>
+  <style>
+    :root{
+      --bg:#f6f3ee;--paper:#fffdf8;--ink:#28231d;--muted:#6c6257;--line:#ddd3c5;
+      --brown:#7b4b2a;--green:#2f6656;--soft:#ece3d7;--deep:#201914;--amber:#9a6a2f;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+    header{background:var(--paper);border-bottom:1px solid var(--line);padding:28px}
+    main{padding:24px 28px 46px}
+    .wrap{max-width:1320px;margin:auto}
+    h1{margin:0 0 8px;font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:0}
+    h2{margin:0;font-size:24px;line-height:1.15}
+    h3{margin:0;font-size:18px}
+    p{margin:0}
+    .sub{max-width:940px;color:var(--muted);font-size:16px}
+    .site-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .site-nav a,.button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;border-radius:8px;padding:0 12px;background:var(--brown);color:#fff;text-decoration:none;font-weight:800;border:1px solid var(--brown)}
+    .site-nav a:nth-child(3),.button.green{background:var(--green);border-color:var(--green)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:10px;margin-top:18px}
+    .stat{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px}
+    .stat b{display:block;font-size:24px;line-height:1.1}
+    .stat span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+    .notice{margin:0 0 18px;padding:13px 14px;border:1px solid #cfe1d4;border-radius:8px;background:#eef6f0;color:#2f5542}
+    .shot{background:var(--paper);border:1px solid var(--line);border-radius:8px;margin-bottom:18px;overflow:hidden}
+    .shot-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding:16px;border-bottom:1px solid var(--line);background:#fbf8f1}
+    .meta{display:grid;grid-template-columns:repeat(4,minmax(120px,1fr));gap:10px;margin-top:12px}
+    .meta div{background:#f1e8db;border:1px solid var(--line);border-radius:8px;padding:9px 10px}
+    .label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:3px}
+    .pill{display:inline-flex;align-items:center;min-height:28px;border-radius:999px;background:#e7efe9;color:var(--green);font-size:13px;font-weight:900;padding:0 10px;white-space:nowrap}
+    .variants{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px;background:#ede5da}
+    .variant{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+    .image-button{display:block;width:100%;border:0;background:#111;padding:0;cursor:zoom-in}
+    .image-button img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+    .variant-body{padding:12px;display:grid;gap:8px}
+    .style-tag{display:inline-flex;width:max-content;align-items:center;border-radius:999px;background:#231b15;color:#fff;font-size:12px;font-weight:900;padding:4px 8px}
+    .style-tag.photo{background:#5c5a52}
+    .style-tag.paint{background:#7b4b2a}
+    .small{color:var(--muted);font-size:13px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+    .ghost{background:#fff;color:var(--brown);border-color:var(--line)}
+    dialog{border:0;border-radius:8px;padding:0;background:transparent;max-width:min(96vw,1400px)}
+    dialog::backdrop{background:#000c}
+    .modal{background:#111;color:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 70px #0008}
+    .modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 12px;background:#1f1f1f}
+    .modal-title{font-weight:800}
+    .modal button{min-height:34px;border:0;border-radius:8px;background:#fff;color:#111;font:inherit;font-weight:800;padding:0 12px;cursor:pointer}
+    .modal img{display:block;max-width:96vw;max-height:84vh;width:auto;height:auto;margin:auto;background:#222}
+    @media(max-width:920px){
+      header,main{padding-left:16px;padding-right:16px}
+      .stats,.meta,.variants,.shot-head{grid-template-columns:1fr}
+      .shot-head{text-align:left}
+      .pill{width:max-content}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>«Айтжан. Мұра» — финальные шоты для тестовой анимации</h1>
+    <p class="sub">Первые выбранные кадры из шотлиста. По каждому кадру есть две версии: v02 как архивно-фотореалистичный стиль и v03 как живописная acrylic memory версия. Эти PNG можно брать в Seedance/Kling для ручного теста движения.</p>
+    <nav class="site-nav" aria-label="Навигация">
+      <a href="./">Шотлист</a>
+      <a href="characters.html">Персонажи</a>
+      <a href="final-shots.html">Финальные шоты</a>
+      <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
+    </nav>
+    <div class="stats">
+      <div class="stat"><b>3</b><span>выбранных шота</span></div>
+      <div class="stat"><b>6</b><span>PNG-версий</span></div>
+      <div class="stat"><b>v02/v03</b><span>стили для выбора</span></div>
+      <div class="stat"><b>16:9</b><span>формат под видео</span></div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="notice">Клик по изображению открывает PNG крупно. Кнопка «Открыть PNG» ведет прямо на исходник в полном размере.</div>
+    <div id="app"></div>
+  </div>
+</main>
+<dialog id="viewer">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title" id="viewerTitle"></div><button id="closeViewer" type="button">Закрыть</button></div>
+    <img id="viewerImg" alt="">
+  </div>
+</dialog>
+<script>
+const shots = [
+  {
+    id:"FS-001",
+    source:"2-16",
+    title:"Қарағай сүйреу",
+    section:"Серия 2 — «Тау. Қамшы. Күш»",
+    scenario:"Құла ат үлкен қарағайды сүйреп келеді.",
+    description:"Құла ат тянет тяжелый ствол қарағай по горному склону; Айтжан спокойно ведет коня рядом.",
+    animation:"Главный action-shot блока: медленный проход коня, натяжение упряжи, движение ствола по камням.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-001_Qaragai_suyreu_v02.png",note:"Архивная документальная версия: холодная гора, зерно пленки, реалистичная тяжесть."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-001_Qaragai_suyreu_v03.png",note:"Живописная версия: сильный силуэт коня, широкие мазки, эпичнее для эмоционального монтажа."}
+    ]
+  },
+  {
+    id:"FS-002",
+    source:"2-35",
+    title:"Қымыз ішу",
+    section:"Серия 2 — «Тау. Қамшы. Күш»",
+    scenario:"Ең кем дегенде, бір 40-50 үйден қымыз ішесің.",
+    description:"Люди на жайлау пьют қымыз, разговаривают у юрт; на фоне табуны и вечерняя летняя долина.",
+    animation:"Тихий бытовой кадр: легкий дым, жесты рук, небольшое движение людей и табуна на дальнем плане.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-002_Qymyz_ishu_v02.png",note:"Фотореалистичная бытовая версия: ощущение восстановленного архива и настоящего жайлау."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-002_Qymyz_ishu_v03.png",note:"Теплая живописная версия: золотой вечер, фактура акрила, сильнее ощущение семейной памяти."}
+    ]
+  },
+  {
+    id:"FS-003",
+    source:"3-28",
+    title:"Құшақтау",
+    section:"Серия 3 — «Қоштасу, аманат»",
+    scenario:"Онда құшақтап, бетімді сүйді.",
+    description:"Айтжан обнимает молодого Ниетжана у постели; аманат передается через тихий жест отца и сына.",
+    animation:"Кульминационный эмоциональный кадр: медленный push-in, мерцание керосиновой лампы, почти неподвижные лица.",
+    variants:[
+      {style:"v02",label:"Vintage hand-colored photo realism",tag:"photo",file:"assets/final-shots/FS-003_Qushaqtau_v02.png",note:"Документальная интимность: реалистичный свет лампы, спокойная сила прощания."},
+      {style:"v03",label:"Acrylic epic memory",tag:"paint",file:"assets/final-shots/FS-003_Qushaqtau_v03.png",note:"Живописная кульминация: плотная фактура, теплый свет, сцена выглядит как память рода."}
+    ]
+  }
+];
+
+const app = document.getElementById("app");
+const viewer = document.getElementById("viewer");
+const viewerImg = document.getElementById("viewerImg");
+const viewerTitle = document.getElementById("viewerTitle");
+
+function esc(value){
+  return String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+
+function variantCard(shot, variant){
+  const title = `${shot.id} ${shot.title} ${variant.style}`;
+  return `
+    <article class="variant">
+      <button class="image-button" type="button" data-full="${esc(variant.file)}" data-title="${esc(title)}">
+        <img src="${esc(variant.file)}" alt="${esc(title)}" loading="lazy">
+      </button>
+      <div class="variant-body">
+        <span class="style-tag ${esc(variant.tag)}">${esc(variant.style)}</span>
+        <h3>${esc(variant.label)}</h3>
+        <p class="small">${esc(variant.note)}</p>
+        <div class="actions">
+          <a class="button ghost" href="${esc(variant.file)}" target="_blank" rel="noopener">Открыть PNG</a>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+app.innerHTML = shots.map(shot => `
+  <section class="shot">
+    <div class="shot-head">
+      <div>
+        <h2>${esc(shot.id)} · ${esc(shot.title)}</h2>
+        <div class="meta">
+          <div><span class="label">Шотлист</span>${esc(shot.source)}</div>
+          <div><span class="label">Часть</span>${esc(shot.section)}</div>
+          <div><span class="label">Сценарий</span>${esc(shot.scenario)}</div>
+          <div><span class="label">Анимация</span>${esc(shot.animation)}</div>
+        </div>
+        <p class="small" style="margin-top:10px">${esc(shot.description)}</p>
+      </div>
+      <span class="pill">2 версии</span>
+    </div>
+    <div class="variants">
+      ${shot.variants.map(variant => variantCard(shot, variant)).join("")}
+    </div>
+  </section>
+`).join("");
+
+document.querySelectorAll(".image-button").forEach(button => {
+  button.addEventListener("click", () => {
+    viewerImg.src = button.dataset.full;
+    viewerImg.alt = button.dataset.title;
+    viewerTitle.textContent = button.dataset.title;
+    viewer.showModal();
+  });
+});
+document.getElementById("closeViewer").addEventListener("click", () => viewer.close());
+viewer.addEventListener("click", event => {
+  if (event.target === viewer) viewer.close();
+});
+</script>
+</body>
+</html>
