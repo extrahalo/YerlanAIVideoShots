@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Айтжан. Мұра — production character sheets</title>
+  <style>
+    :root{
+      --bg:#f6f3ee;--paper:#fffdf8;--ink:#28231d;--muted:#6c6257;--line:#ddd3c5;
+      --brown:#7b4b2a;--green:#2f6656;--soft:#ece3d7;--warn:#fff4df;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
+    header{background:var(--paper);border-bottom:1px solid var(--line);padding:28px}
+    main{padding:24px 28px 44px}
+    .wrap{max-width:1320px;margin:auto}
+    h1{margin:0 0 8px;font-size:clamp(30px,4vw,44px);line-height:1.08}
+    h2{margin:0;font-size:26px;line-height:1.12}
+    h3{margin:0;font-size:17px}
+    p{margin:0}
+    .sub{max-width:920px;color:var(--muted)}
+    .site-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .site-nav a,.button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;border-radius:8px;padding:0 12px;background:var(--brown);color:#fff;text-decoration:none;font-weight:800;border:1px solid var(--brown)}
+    .site-nav a:nth-child(4),.button.green{background:var(--green);border-color:var(--green)}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:10px;margin-top:18px}
+    .stat{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px}
+    .stat b{display:block;font-size:24px;line-height:1.1}
+    .stat span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
+    .notice{margin:0 0 18px;padding:13px 14px;border:1px solid #ead0a3;border-radius:8px;background:var(--warn);color:#5b3d09}
+    .sheet{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:18px}
+    .sheet-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;padding:16px;border-bottom:1px solid var(--line);background:#fbf8f1}
+    .pill{display:inline-flex;align-items:center;min-height:28px;border-radius:999px;background:#e7efe9;color:var(--green);font-size:13px;font-weight:900;padding:0 10px;white-space:nowrap}
+    .grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:12px;padding:14px;background:#ede5da}
+    .ref{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+    .ref.face{border-color:#b9905b;box-shadow:0 0 0 2px #e8d2ad inset}
+    .ref button{display:block;width:100%;border:0;background:#111;padding:0;cursor:zoom-in}
+    .ref img{display:block;width:100%;height:720px;object-fit:contain;background:#c8c1b6}
+    .ref.face img{height:720px}
+    .body{display:grid;gap:8px;padding:12px}
+    .label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:3px}
+    .small{color:var(--muted);font-size:13px}
+    .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 14px 14px}
+    .rule{background:#fffaf2;border:1px solid #d3c7b8;border-radius:8px;padding:11px 12px}
+    dialog{border:0;border-radius:8px;padding:0;background:transparent;max-width:min(96vw,1400px)}
+    dialog::backdrop{background:#000c}
+    .modal{background:#111;color:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 70px #0008}
+    .modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 12px;background:#1f1f1f}
+    .modal-title{font-weight:800}
+    .modal button{min-height:34px;border:0;border-radius:8px;background:#fff;color:#111;font:inherit;font-weight:800;padding:0 12px;cursor:pointer}
+    .modal img{display:block;max-width:96vw;max-height:84vh;width:auto;height:auto;margin:auto;background:#222}
+    @media(max-width:980px){
+      header,main{padding-left:16px;padding-right:16px}
+      .stats,.grid,.rules,.sheet-head{grid-template-columns:1fr}
+      .ref img,.ref.face img{height:auto;max-height:760px}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>«Айтжан. Мұра» — production character sheets</h1>
+    <p class="sub">Рабочие референсы для генерации финальных шотов. Главный источник идентичности — approved face reference. Full body front/back используются как костюм, силуэт и пропорции, но не заменяют лицо.</p>
+    <nav class="site-nav" aria-label="Навигация">
+      <a href="./">Шотлист</a>
+      <a href="characters.html">Персонажи</a>
+      <a href="final-shots.html">Финальные шоты</a>
+      <a href="character-sheets.html">Character sheets</a>
+      <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
+    </nav>
+    <div class="stats">
+      <div class="stat"><b>1</b><span>production sheet</span></div>
+      <div class="stat"><b>V2</b><span>финальное направление</span></div>
+      <div class="stat"><b>Face</b><span>главный референс</span></div>
+      <div class="stat"><b>Body</b><span>костюм / силуэт</span></div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="notice">Правило производства: если лицо в full body отличается от approved portrait, в промпте шота закрепляем лицо по approved portrait, а full body используем только для одежды и пропорций.</div>
+    <section class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h2>Ниетжан, 25 лет</h2>
+          <p class="small" style="margin-top:8px">Молодой взрослый Ниетжан. Использовать для переходного взрослого периода, если потребуется показать его после линии аманата.</p>
+        </div>
+        <span class="pill">FACE LOCK</span>
+      </div>
+      <div class="grid">
+        <article class="ref face">
+          <button class="image-button" type="button" data-full="assets/character-sheets/CH-NIETZHAN_25_v02_portrait_identity_test.png" data-title="Ниетжан 25 — approved face reference">
+            <img src="assets/character-sheets/CH-NIETZHAN_25_v02_portrait_identity_test.png" alt="Ниетжан 25 — approved face reference">
+          </button>
+          <div class="body">
+            <div><span class="label">Approved face reference</span><strong>Главный источник лица</strong></div>
+            <p class="small">Использовать для всех шотов, где лицо Ниетжана видно крупно или средне. Не заменять лицом из full body.</p>
+          </div>
+        </article>
+        <article class="ref">
+          <button class="image-button" type="button" data-full="assets/character-sheets/nietzhan-25/CH-NIETZHAN_25_v02_full_front_v01.png" data-title="Ниетжан 25 — costume front">
+            <img src="assets/character-sheets/nietzhan-25/CH-NIETZHAN_25_v02_full_front_v01.png" alt="Ниетжан 25 — costume front">
+          </button>
+          <div class="body">
+            <div><span class="label">Costume / body front</span><strong>Костюм спереди</strong></div>
+            <p class="small">Использовать для одежды, роста, посадки халата, брюк, сапог и общей пропорции тела.</p>
+          </div>
+        </article>
+        <article class="ref">
+          <button class="image-button" type="button" data-full="assets/character-sheets/nietzhan-25/CH-NIETZHAN_25_v02_full_back_v01.png" data-title="Ниетжан 25 — costume back">
+            <img src="assets/character-sheets/nietzhan-25/CH-NIETZHAN_25_v02_full_back_v01.png" alt="Ниетжан 25 — costume back">
+          </button>
+          <div class="body">
+            <div><span class="label">Costume / body back</span><strong>Костюм сзади</strong></div>
+            <p class="small">Использовать для заднего вида халата, пояса, брюк, сапог и формы силуэта.</p>
+          </div>
+        </article>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="label">Face traits</span>Темные almond-shaped глаза, прямые брови, узкая переносица, короткие черные волосы, спокойное взрослое выражение.</div>
+        <div class="rule"><span class="label">Costume traits</span>Темный поношенный стеганый халат/куртка, бежевая рубаха, свободные темные брюки, практичные сапоги.</div>
+        <div class="rule"><span class="label">Do not change</span>Не старить, не добавлять бороду/усы, не делать лицо шире/другим, не использовать современную одежду.</div>
+      </div>
+    </section>
+  </div>
+</main>
+<dialog id="viewer">
+  <div class="modal">
+    <div class="modal-head"><div class="modal-title" id="viewerTitle"></div><button id="closeViewer" type="button">Закрыть</button></div>
+    <img id="viewerImg" alt="">
+  </div>
+</dialog>
+<script>
+const viewer = document.getElementById("viewer");
+const viewerImg = document.getElementById("viewerImg");
+const viewerTitle = document.getElementById("viewerTitle");
+document.querySelectorAll(".image-button").forEach(button => {
+  button.addEventListener("click", () => {
+    viewerImg.src = button.dataset.full;
+    viewerImg.alt = button.dataset.title;
+    viewerTitle.textContent = button.dataset.title;
+    viewer.showModal();
+  });
+});
+document.getElementById("closeViewer").addEventListener("click", () => viewer.close());
+viewer.addEventListener("click", event => {
+  if (event.target === viewer) viewer.close();
+});
+</script>
+</body>
+</html>
