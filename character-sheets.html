@@ -30,9 +30,12 @@
     .sheet{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:18px}
     .sheet-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;padding:16px;border-bottom:1px solid var(--line);background:#fbf8f1}
     .pill{display:inline-flex;align-items:center;min-height:28px;border-radius:999px;background:#e7efe9;color:var(--green);font-size:13px;font-weight:900;padding:0 10px;white-space:nowrap}
+    .pill.pending{background:#fff1d5;color:#8b5200}
     .grid{display:grid;grid-template-columns:1.1fr .9fr .9fr;gap:12px;padding:14px;background:#ede5da}
+    .grid.two{grid-template-columns:.8fr 1.2fr}
     .ref{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
     .ref.face{border-color:#b9905b;box-shadow:0 0 0 2px #e8d2ad inset}
+    .ref.draft{border-color:#cbbba8}
     .ref button{display:block;width:100%;border:0;background:#111;padding:0;cursor:zoom-in}
     .ref img{display:block;width:100%;height:720px;object-fit:contain;background:#c8c1b6}
     .ref.face img{height:720px}
@@ -68,7 +71,7 @@
       <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
     </nav>
     <div class="stats">
-      <div class="stat"><b>1</b><span>production sheet</span></div>
+      <div class="stat"><b>4</b><span>production refs</span></div>
       <div class="stat"><b>V2</b><span>финальное направление</span></div>
       <div class="stat"><b>Face</b><span>главный референс</span></div>
       <div class="stat"><b>Body</b><span>костюм / силуэт</span></div>
@@ -78,6 +81,111 @@
 <main>
   <div class="wrap">
     <div class="notice">Правило производства: если лицо в full body отличается от approved portrait, в промпте шота закрепляем лицо по approved portrait, а full body используем только для одежды и пропорций.</div>
+    <section class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h2>Балтақадыр</h2>
+          <p class="small" style="margin-top:8px">Утвержденный персонаж в V01. Нужна корректная конверсия в V02 без изменения лица.</p>
+        </div>
+        <span class="pill pending">V02 PENDING</span>
+      </div>
+      <div class="grid two">
+        <article class="ref face">
+          <button class="image-button" type="button" data-full="assets/character-sheets/baltaqadyr/CH-BALTAQADYR_approved_v01_face_reference.png" data-title="Балтақадыр — approved V01 face reference">
+            <img src="assets/character-sheets/baltaqadyr/CH-BALTAQADYR_approved_v01_face_reference.png" alt="Балтақадыр — approved V01 face reference">
+          </button>
+          <div class="body">
+            <div><span class="label">Approved V01 face reference</span><strong>Главный источник лица</strong></div>
+            <p class="small">До нормальной V02-конверсии использовать это изображение как source of truth для лица, возраста, характера и посадки одежды.</p>
+          </div>
+        </article>
+        <article class="ref draft">
+          <div class="body">
+            <div><span class="label">V02 conversion task</span><strong>Что нужно получить дальше</strong></div>
+            <p class="small">Сделать V02 portrait / character sheet на основе утвержденного V01: тот же человек, та же суровость, рабочая сельская одежда, без сглаживания лица и без современной стилизации.</p>
+          </div>
+          <div class="body">
+            <div><span class="label">Rejected attempts</span><strong>Не использовать</strong></div>
+            <p class="small">Предыдущие автоматические V02-попытки не публикуются: они уходили в странную инфографику и ломали персонажа.</p>
+          </div>
+        </article>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="label">Face traits</span>Крепкое лицо зрелого мужчины, темные волосы, сильные брови, напряженный внимательный взгляд, грубоватая фактура кожи.</div>
+        <div class="rule"><span class="label">Costume traits</span>Темный поношенный халат/рабочая верхняя одежда, светлая рубаха, простой пояс; ощущение степного быта и физической работы.</div>
+        <div class="rule"><span class="label">Do not change</span>Не омолаживать, не делать лицо мягким, не менять черты, не превращать в декоративный исторический костюм.</div>
+      </div>
+    </section>
+    <section class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h2>Ниетжан, 10-14 лет</h2>
+          <p class="small" style="margin-top:8px">Детский/подростковый Ниетжан для поля, жайлау, жылқы/қымыз и бытовых сцен второй серии.</p>
+        </div>
+        <span class="pill">DRAFT FACE LOCK</span>
+      </div>
+      <div class="grid two">
+        <article class="ref face">
+          <button class="image-button" type="button" data-full="assets/character-sheets/CH-NIETZHAN_10-14_v02_portrait_identity_test.png" data-title="Ниетжан 10-14 — face reference candidate">
+            <img src="assets/character-sheets/CH-NIETZHAN_10-14_v02_portrait_identity_test.png" alt="Ниетжан 10-14 — face reference candidate">
+          </button>
+          <div class="body">
+            <div><span class="label">Face reference candidate</span><strong>Главный кандидат на лицо</strong></div>
+            <p class="small">Похожесть была принята как рабочая. Использовать для шотов с лицом, если не будет заменён более точным портретом.</p>
+          </div>
+        </article>
+        <article class="ref draft">
+          <button class="image-button" type="button" data-full="assets/character-sheets/CH-NIETZHAN_10-14_v02_reference_sheet_from_identity.png" data-title="Ниетжан 10-14 — draft combined sheet">
+            <img src="assets/character-sheets/CH-NIETZHAN_10-14_v02_reference_sheet_from_identity.png" alt="Ниетжан 10-14 — draft combined sheet">
+          </button>
+          <div class="body">
+            <div><span class="label">Draft combined sheet</span><strong>Костюм / body draft</strong></div>
+            <p class="small">Использовать осторожно: full body и 3/4 помогают по костюму, но лицо закреплять по отдельному portrait candidate.</p>
+          </div>
+        </article>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="label">Face traits</span>Подростковое лицо, темные глаза, прямые брови, короткие черные волосы, темная тюбетейка, спокойный серьезный взгляд.</div>
+        <div class="rule"><span class="label">Costume traits</span>Темный поношенный халат/куртка, бежевая рубаха, свободные темные брюки, сапоги; одежда простая, не декоративная.</div>
+        <div class="rule"><span class="label">Do not change</span>Не взрослить, не убирать подростковость, не делать лицо шире, не заменять тюбетейку современным головным убором.</div>
+      </div>
+    </section>
+
+    <section class="sheet">
+      <div class="sheet-head">
+        <div>
+          <h2>Ниетжан, 17 лет</h2>
+          <p class="small" style="margin-top:8px">Юный Ниетжан в момент взросления и принятия аманата от Айтжана.</p>
+        </div>
+        <span class="pill">DRAFT FACE LOCK</span>
+      </div>
+      <div class="grid two">
+        <article class="ref face">
+          <button class="image-button" type="button" data-full="assets/character-sheets/CH-NIETZHAN_17_v02_portrait_identity_test.png" data-title="Ниетжан 17 — face reference candidate">
+            <img src="assets/character-sheets/CH-NIETZHAN_17_v02_portrait_identity_test.png" alt="Ниетжан 17 — face reference candidate">
+          </button>
+          <div class="body">
+            <div><span class="label">Face reference candidate</span><strong>Главный кандидат на лицо</strong></div>
+            <p class="small">Использовать как лицо 17-летнего Ниетжана: старше версии 10-14, но ещё подросток, без бороды и усов.</p>
+          </div>
+        </article>
+        <article class="ref draft">
+          <button class="image-button" type="button" data-full="assets/character-sheets/CH-NIETZHAN_17_v02_reference_sheet_from_identity.png" data-title="Ниетжан 17 — draft combined sheet">
+            <img src="assets/character-sheets/CH-NIETZHAN_17_v02_reference_sheet_from_identity.png" alt="Ниетжан 17 — draft combined sheet">
+          </button>
+          <div class="body">
+            <div><span class="label">Draft combined sheet</span><strong>Костюм / body draft</strong></div>
+            <p class="small">Для одежды и пропорций. В шотах с лицом закреплять идентичность по отдельному portrait candidate.</p>
+          </div>
+        </article>
+      </div>
+      <div class="rules">
+        <div class="rule"><span class="label">Face traits</span>Тот же Ниетжан, но старше: короткие черные волосы без тюбетейки, темные глаза, прямые брови, спокойный собранный взгляд.</div>
+        <div class="rule"><span class="label">Costume traits</span>Темный стеганый халат/куртка, бежевая рубаха, свободные темные брюки, сапоги, простая рабочая одежда.</div>
+        <div class="rule"><span class="label">Do not change</span>Не делать взрослым мужчиной 25+, не добавлять бороду/усы, не менять лицо на более грубое.</div>
+      </div>
+    </section>
+
     <section class="sheet">
       <div class="sheet-head">
         <div>
