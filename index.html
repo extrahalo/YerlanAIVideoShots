@@ -3,275 +3,191 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Айтжан. Мұра — шотлист и промпты (V2)</title>
-  <style>
-    :root{
-      --bg:#f6f3ee;--paper:#fffdf8;--ink:#28231d;--muted:#6c6257;--line:#ddd3c5;
-      --brown:#7b4b2a;--green:#2f6656;--soft:#ece3d7;--deep:#201914;--amber:#9a6a2f;--warn:#fff4df;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;line-height:1.45}
-    header{background:var(--paper);border-bottom:1px solid var(--line);padding:24px 28px 26px}
-    main{padding:24px 28px 56px}
-    .wrap{max-width:1320px;margin:auto}
-    h1{margin:0 0 8px;font-size:clamp(28px,3.6vw,42px);line-height:1.08}
-    h2{margin:0;font-size:24px;line-height:1.15}
-    h3{margin:0;font-size:17px}
-    p{margin:0}
-    .sub{max-width:980px;color:var(--muted);font-size:16px}
-    /* brand */
-    .brandbar{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-    .brand{display:inline-flex;align-items:center;text-decoration:none}
-    .brand img{height:38px;width:auto;display:block}
-    .brand-fallback{font-weight:900;letter-spacing:.02em;color:var(--ink);font-size:22px;text-transform:lowercase}
-    .brand-tag{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-left:1px solid var(--line);padding-left:14px}
-    .site-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-    .site-nav a,.button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;border-radius:8px;padding:0 12px;background:var(--brown);color:#fff;text-decoration:none;font-weight:800;border:1px solid var(--brown);cursor:pointer;font:inherit;font-weight:800}
-    .site-nav a.active{background:var(--green);border-color:var(--green)}
-    .site-nav a.ghost,.button.ghost{background:#fff;color:var(--brown);border-color:var(--line)}
-    .button.green{background:var(--green);border-color:var(--green)}
-    .stats{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:10px;margin-top:18px}
-    .stat{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px}
-    .stat b{display:block;font-size:24px;line-height:1.1}
-    .stat span{display:block;color:var(--muted);font-size:13px;margin-top:4px}
-    .notice{margin:0 0 18px;padding:13px 14px;border:1px solid #ead0a3;border-radius:8px;background:var(--warn);color:#5b3d09;font-size:14px}
-    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 20px}
-    .toolbar input{flex:1;min-width:200px;min-height:40px;border:1px solid var(--line);border-radius:8px;padding:0 12px;font:inherit;background:#fff}
-    .seg{display:flex;gap:6px;flex-wrap:wrap}
-    .seg button{min-height:40px;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:0 12px;font:inherit;font-weight:800;cursor:pointer}
-    .seg button.on{background:var(--brown);color:#fff;border-color:var(--brown)}
-    .sectionhead{margin:26px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-    .sectionhead h2{font-size:22px}
-    .sectionhead .count{color:var(--muted);font-size:13px;font-weight:800}
-    .shot{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin-bottom:18px;overflow:hidden}
-    .shot-head{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start;padding:16px;border-bottom:1px solid var(--line);background:#fbf8f1}
-    .shot-head h3{font-size:19px}
-    .pill{display:inline-flex;align-items:center;min-height:26px;border-radius:999px;background:#e7efe9;color:var(--green);font-size:12px;font-weight:900;padding:0 10px;white-space:nowrap}
-    .pill.scene{background:#efe7da;color:var(--amber)}
-    .meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:14px 16px 4px}
-    .meta>div{background:#f3ebdf;border:1px solid var(--line);border-radius:8px;padding:9px 11px}
-    .label{display:block;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;font-weight:900;margin-bottom:3px}
-    .kz{font-size:14px}
-    .audio{font-size:13px;color:#4a4036;font-style:italic}
-    .synopsis{padding:8px 16px 0;color:#4a4036;font-size:14px}
-    .refs{padding:14px 16px 4px}
-    .refgrid{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
-    .refcard{width:96px;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff;position:relative}
-    .refcard button{display:block;width:100%;border:0;background:#cdc6ba;padding:0;cursor:zoom-in}
-    .refcard img{display:block;width:100%;height:96px;object-fit:cover}
-    .refcard .num{position:absolute;top:4px;left:4px;background:#201914cc;color:#fff;font-size:11px;font-weight:900;border-radius:5px;padding:1px 6px}
-    .refcard .nm{display:block;font-size:10px;color:var(--muted);padding:4px 5px;line-height:1.2;word-break:break-word}
-    .prompts{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 16px 16px}
-    .prompt-box{display:grid;gap:8px;padding:12px;border:1px solid #d3c7b8;border-radius:8px;background:#fffaf2}
-    .prompt-box.video{background:#f1f6f2;border-color:#cfe1d4}
-    .prompt-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-    .ptag{display:inline-flex;align-items:center;border-radius:999px;font-size:11px;font-weight:900;padding:3px 9px;color:#fff;background:var(--brown)}
-    .ptag.video{background:var(--green)}
-    .prompt-text{white-space:pre-wrap;color:#3b332b;font-size:13px;max-height:200px;overflow:auto;border-top:1px dashed #e0d6c6;padding-top:8px}
-    .prompt-box.video .prompt-text{border-top-color:#cfe1d4}
-    .small{color:var(--muted);font-size:12px}
-    .empty{padding:30px;text-align:center;color:var(--muted)}
-    dialog{border:0;border-radius:8px;padding:0;background:transparent;max-width:min(96vw,1400px)}
-    dialog::backdrop{background:#000c}
-    .modal{background:#111;color:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 70px #0008}
-    .modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:10px 12px;background:#1f1f1f}
-    .modal-title{font-weight:800}
-    .modal button{min-height:34px;border:0;border-radius:8px;background:#fff;color:#111;font:inherit;font-weight:800;padding:0 12px;cursor:pointer}
-    .modal img{display:block;max-width:96vw;max-height:84vh;width:auto;height:auto;margin:auto;background:#222}
-    footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:20px 28px 40px}
-    @media(max-width:920px){
-      header,main{padding-left:16px;padding-right:16px}
-      .stats,.meta,.prompts{grid-template-columns:1fr}
-      .shot-head{grid-template-columns:1fr}
-    }
-  </style>
+  <title>Айтжан. Мұра — архив · шотлист и промпты</title>
+  <meta name="description" content="Производственный шотлист AI-фильма «Айтжан. Мұра»: V2-стиль, промпты Nano Banana Pro и Seedance для каждого кадра.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/archive.css">
 </head>
 <body>
-<header>
+
+<div class="slate">
+  <div class="wrap slate-in">
+    <a class="brand" href="./" aria-label="JEL Labs">
+      <img src="assets/brand/jel-labs-logo.png" alt="JEL Labs"
+           onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'">
+      <span class="brand-fallback" style="display:none">jel labs.</span>
+    </a>
+    <span class="dot" aria-hidden="true"></span>
+    <span class="hide-sm">AI Film Production</span>
+    <span class="sep"></span>
+    <span class="meta-tag hide-sm">PROD · <b>«АЙТЖАН. МҰРА»</b></span>
+    <span class="meta-tag">V2 · <b id="slCount">—</b> SHOTS</span>
+  </div>
+</div>
+
+<header class="masthead">
   <div class="wrap">
-    <div class="brandbar">
-      <a class="brand" href="./" aria-label="JEL Labs">
-        <img src="assets/brand/jel-labs-logo.png" alt="JEL Labs"
-             onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'">
-        <span class="brand-fallback" style="display:none">jel&nbsp;labs.</span>
-      </a>
-      <span class="brand-tag">AI Film Production</span>
-    </div>
-    <h1>«Айтжан. Мұра» — шотлист и промпты</h1>
-    <p class="sub">Производственный шотлист по обновлённому сценарию: пролог и три серии, разбитые по сценам. Для каждого кадра — финальный визуальный стиль <b>V2</b> (восстановленное архивное фото 1940–50-х), готовый промпт для <b>Nano Banana Pro</b> (картинка) и промпт для <b>Seedance</b> (видео), плюс точные референсы персонажей в порядке <code>@image1, @image2…</code>.</p>
-    <nav class="site-nav" aria-label="Навигация">
+    <div class="kicker reveal d1">Айтжан. Мұра · документальный AI-фильм</div>
+    <h1 class="reveal d2">Архив <em>кадров</em></h1>
+    <p class="lede reveal d3">Производственный шотлист по обновлённому сценарию — пролог и три серии, разбитые по сценам. Для каждого кадра: финальный стиль <b>V2</b> (восстановленное архивное фото 1940–50-х), готовый промпт <b>Nano Banana Pro</b> для картинки и промпт <b>Seedance</b> для видео, плюс референсы персонажей в порядке <code class="k">@image1 … @imageN</code>.</p>
+    <nav class="filmnav reveal d4" aria-label="Навигация">
       <a href="./" class="active">Шотлист</a>
-      <a href="characters.html" class="ghost">Персонажи</a>
-      <a href="final-shots.html" class="ghost">Финальные шоты</a>
-      <a href="character-sheets.html" class="ghost">Character sheets</a>
-      <a href="https://github.com/extrahalo/YerlanAIVideoShots" class="ghost">GitHub</a>
+      <a href="characters.html">Персонажи</a>
+      <a href="final-shots.html">Финальные шоты</a>
+      <a href="character-sheets.html">Character sheets</a>
+      <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
     </nav>
-    <div class="stats">
-      <div class="stat"><b id="stShots">—</b><span>кадров (сцен)</span></div>
+    <div class="statstrip reveal d4">
+      <div class="stat"><b id="stShots">—</b><span>кадров / сцен</span></div>
       <div class="stat"><b>V2</b><span>финальный стиль</span></div>
-      <div class="stat"><b id="stPrompts">—</b><span>промптов (img+video)</span></div>
-      <div class="stat"><b>4</b><span>блока: пролог + 3 серии</span></div>
+      <div class="stat"><b id="stPrompts">—</b><span>промптов img + video</span></div>
+      <div class="stat"><b>04</b><span>пролог + 3 серии</span></div>
     </div>
   </div>
 </header>
+
 <main>
   <div class="wrap">
-    <div class="notice">
-      <b>Как пользоваться:</b> в Higgsfield/Seedance прикрепляйте референсы персонажей <b>в том же порядке</b>, в каком они показаны под кадром — первый = <code>@image1</code>, второй = <code>@image2</code> и т.д. Промпт Nano Banana Pro даёт картинку-кадр в стиле V2; затем эту картинку анимируете промптом Seedance. Лицо всегда берётся из утверждённого портрета-референса; full-body — только костюм и пропорции.
-    </div>
+    <div class="notice"><b>Как пользоваться:</b> в Higgsfield/Seedance прикрепляйте референсы персонажей <b>в том же порядке</b>, что показан под кадром — первый = <code>@image1</code>, второй = <code>@image2</code> и т.д. Промпт Nano Banana Pro даёт картинку-кадр в стиле V2; затем эту картинку анимируете промптом Seedance. Лицо берётся из утверждённого портрета-референса; full-body — только костюм и пропорции.</div>
     <div class="toolbar">
-      <input id="search" type="search" placeholder="Поиск по кадрам: соғым, қамшы, аманат, S2-06…" aria-label="Поиск">
+      <input id="search" type="search" placeholder="поиск: соғым, қамшы, аманат, S2-06…" aria-label="Поиск">
       <div class="seg" id="seg"></div>
     </div>
     <div id="app"></div>
-    <div id="empty" class="empty" style="display:none">Ничего не найдено по запросу.</div>
+    <div id="empty" class="empty" style="display:none">— ничего не найдено —</div>
   </div>
 </main>
+
 <footer>
-  <div class="wrap">JEL Labs · «Айтжан. Мұра» · производственный шотлист V2 · промпты Nano Banana Pro + Seedance. Не публиковать неутверждённые сгенерированные изображения.</div>
+  <div class="wrap">
+    <span><b>JEL Labs</b> · «Айтжан. Мұра» · производственный архив V2</span>
+    <span>Nano Banana Pro + Seedance · не публиковать неутверждённые изображения</span>
+  </div>
 </footer>
+
 <dialog id="viewer">
   <div class="modal">
-    <div class="modal-head"><div class="modal-title" id="viewerTitle"></div><button id="closeViewer" type="button">Закрыть</button></div>
+    <div class="modal-head"><span id="viewerTitle"></span><button id="closeViewer" type="button">Закрыть ✕</button></div>
     <img id="viewerImg" alt="">
   </div>
 </dialog>
+
 <script src="assets/data/shotlist.js"></script>
 <script>
 const shots = window.SHOTLIST || [];
 const sectionsOrder = ["Пролог","Серия 1 — «Айтжан: тірек адам»","Серия 2 — «Тау. Қамшы. Күш»","Серия 3 — «Қоштасу, аманат»"];
-const shortSection = {
-  "Пролог":"Пролог",
-  "Серия 1 — «Айтжан: тірек адам»":"Серия 1",
-  "Серия 2 — «Тау. Қамшы. Күш»":"Серия 2",
-  "Серия 3 — «Қоштасу, аманат»":"Серия 3"
+const sectionMeta = {
+  "Пролог":{n:"00",k:"Prologue",t:"Пролог"},
+  "Серия 1 — «Айтжан: тірек адам»":{n:"I",k:"Серия первая",t:"«Айтжан: тірек адам»"},
+  "Серия 2 — «Тау. Қамшы. Күш»":{n:"II",k:"Серия вторая",t:"«Тау. Қамшы. Күш»"},
+  "Серия 3 — «Қоштасу, аманат»":{n:"III",k:"Серия третья",t:"«Қоштасу, аманат»"}
 };
-const app = document.getElementById("app");
-const emptyEl = document.getElementById("empty");
-const search = document.getElementById("search");
-const seg = document.getElementById("seg");
-const viewer = document.getElementById("viewer");
-const viewerImg = document.getElementById("viewerImg");
-const viewerTitle = document.getElementById("viewerTitle");
+const shortSection = {
+  "Пролог":"Пролог","Серия 1 — «Айтжан: тірек адам»":"Серия 1",
+  "Серия 2 — «Тау. Қамшы. Күш»":"Серия 2","Серия 3 — «Қоштасу, аманат»":"Серия 3"
+};
+const app=document.getElementById("app"), emptyEl=document.getElementById("empty");
+const search=document.getElementById("search"), seg=document.getElementById("seg");
+const viewer=document.getElementById("viewer"), viewerImg=document.getElementById("viewerImg"), viewerTitle=document.getElementById("viewerTitle");
+let activeSection="all", query="";
 
-document.getElementById("stShots").textContent = shots.length;
-document.getElementById("stPrompts").textContent = shots.length * 2;
+document.getElementById("stShots").textContent=shots.length;
+document.getElementById("slCount").textContent=shots.length;
+document.getElementById("stPrompts").textContent=shots.length*2;
 
-let activeSection = "all";
-let query = "";
-
-// segmented filter
-const segs = [["all","Все"]].concat(sectionsOrder.map(s=>[s, shortSection[s]]));
-seg.innerHTML = segs.map(([v,l],i)=>`<button data-sec="${esc(v)}" class="${i===0?'on':''}">${esc(l)}</button>`).join("");
+const segs=[["all","Все"]].concat(sectionsOrder.map(s=>[s,shortSection[s]]));
+seg.innerHTML=segs.map(([v,l],i)=>`<button data-sec="${esc(v)}" class="${i===0?'on':''}">${esc(l)}</button>`).join("");
 seg.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
   seg.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
-  b.classList.add("on");
-  activeSection = b.dataset.sec;
-  render();
+  b.classList.add("on"); activeSection=b.dataset.sec; render();
 }));
-search.addEventListener("input",()=>{ query = search.value.trim().toLowerCase(); render(); });
+search.addEventListener("input",()=>{query=search.value.trim().toLowerCase();render();});
 
-function esc(v){return String(v).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
-function refImg(name){return `assets/characters/${name}_openai_v02.png`;}
-function refLabel(name){
-  // strip CH-### prefix and trailing role tokens into readable text
-  let t = name.replace(/^CH-\d+_/,'').replace(/_/g,' ');
-  return t;
-}
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function refImg(n){return `assets/characters/${n}_openai_v02.png`;}
+function refLabel(n){return n.replace(/^CH-\d+_/,'').replace(/_/g,' ');}
 
-function refCard(name,i){
-  const file = refImg(name), title = `${name} (@image${i+1})`;
-  return `<div class="refcard">
+function frame(name,i){
+  const file=refImg(name), title=`${name} · @image${i+1}`;
+  return `<div class="frame">
     <button class="image-button" type="button" data-full="${esc(file)}" data-title="${esc(title)}">
-      <img src="${esc(file)}" alt="${esc(title)}" loading="lazy">
-    </button>
-    <span class="num">@image${i+1}</span>
-    <span class="nm">${esc(refLabel(name))}</span>
+      <img src="${esc(file)}" alt="${esc(title)}" loading="lazy"></button>
+    <span class="imgn">@image${i+1}</span>
+    <span class="cap">${esc(refLabel(name))}</span>
   </div>`;
 }
-
-function promptBox(kind,label,tag,text){
-  return `<div class="prompt-box ${kind}">
-    <div class="prompt-head">
-      <span class="ptag ${kind}">${esc(tag)}</span>
-      <button class="button green copy-prompt" type="button" data-prompt="${esc(text)}">Копировать</button>
-    </div>
-    <div class="label" style="margin:0">${esc(label)}</div>
-    <div class="prompt-text">${esc(text)}</div>
+function promptSlate(kind,tag,text){
+  const cls=kind==="img"?"prompt--img":"prompt--vid";
+  return `<div class="prompt ${cls}">
+    <div class="prompt-top"><span class="ptag">${esc(tag)}</span>
+      <button class="btn btn--copy copy-prompt" type="button" data-prompt="${esc(text)}">⧉ Копировать</button></div>
+    <div class="ptext">${esc(text)}</div>
   </div>`;
 }
-
 function shotCard(s){
-  const refs = (s.refs&&s.refs.length)
-    ? `<div class="refs"><span class="label">Референсы — прикрепить в этом порядке</span><div class="refgrid">${s.refs.map((r,i)=>refCard(r,i)).join("")}</div></div>`
-    : `<div class="refs"><span class="label">Референсы</span><p class="small">Без персонажей — чистый кадр-окружение.</p></div>`;
-  return `<section class="shot" id="${esc(s.id)}">
+  const refs=(s.refs&&s.refs.length)
+    ? `<div class="refs"><span class="lab">Референсы — прикрепить в этом порядке</span><div class="contact">${s.refs.map((r,i)=>frame(r,i)).join("")}</div></div>`
+    : `<div class="refs"><span class="lab">Референсы</span><p class="none">— без персонажей: чистый кадр-окружение —</p></div>`;
+  return `<section class="shot reveal-up" id="${esc(s.id)}">
     <div class="shot-head">
-      <div>
-        <h3>${esc(s.id)} · ${esc(s.title)}</h3>
-        <p class="small" style="margin-top:6px">${esc(shortSection[s.section]||s.section)} · ${esc(s.scene)}</p>
-      </div>
-      <span class="pill">${esc(s.runtime||"")}</span>
+      <div><span class="shot-id">${esc(s.id)}</span><h3>${esc(s.title)}</h3>
+        <div class="where">${esc(shortSection[s.section]||s.section)} · ${esc(s.scene)}</div></div>
+      <span class="runtime">${esc(s.runtime||"")}</span>
     </div>
-    <div class="meta">
-      <div><span class="label">Сценарий (KZ)</span><div class="kz">${esc(s.kz)}</div></div>
-      <div><span class="label">Аудио</span><div class="audio">${esc(s.audio)}</div></div>
+    <div class="duo">
+      <div><span class="lab">Сценарий · KZ</span><div class="kz">${esc(s.kz)}</div></div>
+      <div><span class="lab">Аудио</span><div class="aud">${esc(s.audio)}</div></div>
     </div>
     <p class="synopsis">${esc(s.synopsis)}</p>
     ${refs}
     <div class="prompts">
-      ${promptBox("image","Nano Banana Pro — image prompt (V2)","Nano Banana Pro",s.imagePrompt)}
-      ${promptBox("video","Seedance / Kling — video prompt","Seedance",s.videoPrompt)}
+      ${promptSlate("img","Nano Banana Pro · image",s.imagePrompt)}
+      ${promptSlate("vid","Seedance · video",s.videoPrompt)}
     </div>
   </section>`;
 }
-
 function matches(s){
-  if(activeSection!=="all" && s.section!==activeSection) return false;
-  if(!query) return true;
-  const hay = [s.id,s.title,s.kz,s.audio,s.synopsis,s.scene,s.section,(s.refs||[]).join(" ")].join(" ").toLowerCase();
-  return hay.includes(query);
+  if(activeSection!=="all"&&s.section!==activeSection)return false;
+  if(!query)return true;
+  return [s.id,s.title,s.kz,s.audio,s.synopsis,s.scene,s.section,(s.refs||[]).join(" ")].join(" ").toLowerCase().includes(query);
 }
-
 function render(){
-  const list = shots.filter(matches);
-  if(!list.length){ app.innerHTML=""; emptyEl.style.display="block"; return; }
+  const list=shots.filter(matches);
+  if(!list.length){app.innerHTML="";emptyEl.style.display="block";return;}
   emptyEl.style.display="none";
   let html="";
   for(const sec of sectionsOrder){
-    const group = list.filter(s=>s.section===sec);
-    if(!group.length) continue;
-    html += `<div class="sectionhead"><h2>${esc(sec)}</h2><span class="count">${group.length} кадр(ов)</span></div>`;
-    html += group.map(shotCard).join("");
+    const g=list.filter(s=>s.section===sec); if(!g.length)continue;
+    const m=sectionMeta[sec];
+    html+=`<div class="act"><span class="numeral">${esc(m.n)}</span>
+      <div class="act-t"><div class="act-k">${esc(m.k)}</div><h2>${esc(m.t)}</h2></div>
+      <span class="count">${g.length} кадр(ов)</span></div>`;
+    html+=g.map(shotCard).join("");
   }
-  app.innerHTML = html;
-  bind();
+  app.innerHTML=html; bind(); observe();
 }
-
 function bind(){
-  document.querySelectorAll(".image-button").forEach(b=>{
-    b.addEventListener("click",()=>{
-      viewerImg.src=b.dataset.full; viewerImg.alt=b.dataset.title;
-      viewerTitle.textContent=b.dataset.title; viewer.showModal();
-    });
-  });
-  document.querySelectorAll(".copy-prompt").forEach(b=>{
-    b.addEventListener("click",async()=>{
-      const orig=b.textContent;
-      try{ await navigator.clipboard.writeText(b.dataset.prompt); }
-      catch(e){
-        const a=document.createElement("textarea");a.value=b.dataset.prompt;
-        document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();
-      }
-      b.textContent="Скопировано ✓";
-      setTimeout(()=>{b.textContent=orig;},1400);
-    });
-  });
+  document.querySelectorAll(".image-button").forEach(b=>b.addEventListener("click",()=>{
+    viewerImg.src=b.dataset.full;viewerImg.alt=b.dataset.title;
+    viewerTitle.innerHTML="<b>REF</b> · "+esc(b.dataset.title);viewer.showModal();
+  }));
+  document.querySelectorAll(".copy-prompt").forEach(b=>b.addEventListener("click",async()=>{
+    const o=b.textContent;
+    try{await navigator.clipboard.writeText(b.dataset.prompt);}
+    catch(e){const a=document.createElement("textarea");a.value=b.dataset.prompt;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove();}
+    b.textContent="✓ Скопировано";setTimeout(()=>b.textContent=o,1400);
+  }));
 }
-
+let io;
+function observe(){
+  if(io)io.disconnect();
+  io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-in");io.unobserve(e.target);}}),{rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll(".shot.reveal-up:not(.is-in)").forEach(el=>io.observe(el));
+}
 document.getElementById("closeViewer").addEventListener("click",()=>viewer.close());
-viewer.addEventListener("click",e=>{ if(e.target===viewer) viewer.close(); });
-
+viewer.addEventListener("click",e=>{if(e.target===viewer)viewer.close();});
 render();
 </script>
 </body>
