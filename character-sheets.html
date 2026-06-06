@@ -44,6 +44,21 @@
     .small{color:var(--muted);font-size:13px}
     .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 14px 14px}
     .rule{background:#fffaf2;border:1px solid #d3c7b8;border-radius:8px;padding:11px 12px}
+    .coverage{background:var(--paper);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:18px}
+    .coverage h2{padding:16px 16px 0;font-size:20px}
+    .coverage .small{padding:6px 16px 14px}
+    .cov-scroll{overflow-x:auto}
+    table.cov{width:100%;border-collapse:collapse;min-width:680px;font-size:14px}
+    table.cov th,table.cov td{padding:10px 12px;text-align:left;border-top:1px solid var(--line);vertical-align:top}
+    table.cov thead th{background:#fbf8f1;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+    table.cov tbody th{font-weight:800;white-space:nowrap}
+    table.cov td.c{text-align:center;white-space:nowrap}
+    .mark{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:6px;font-weight:900;font-size:13px}
+    .mark.ok{background:#e1efe6;color:var(--green)}
+    .mark.part{background:#fff1d5;color:#8b5200}
+    .mark.no{background:#efe7da;color:#a09583}
+    .legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 16px 16px;color:var(--muted);font-size:12px}
+    .legend span{display:inline-flex;align-items:center;gap:6px}
     dialog{border:0;border-radius:8px;padding:0;background:transparent;max-width:min(96vw,1400px)}
     dialog::backdrop{background:#000c}
     .modal{background:#111;color:#fff;border-radius:8px;overflow:hidden;box-shadow:0 20px 70px #0008}
@@ -81,6 +96,65 @@
 <main>
   <div class="wrap">
     <div class="notice">Правило производства: если лицо в full body отличается от approved portrait, в промпте шота закрепляем лицо по approved portrait, а full body используем только для одежды и пропорций.</div>
+
+    <section class="coverage">
+      <h2>Готовность референсов</h2>
+      <p class="small">Полный комплект на персонажа: 2 близких портрета лица, full body спереди, full body сзади, текстовые правила. Таблица показывает, что уже собрано и что ещё нужно догенерировать (только по утверждённым лицам).</p>
+      <div class="cov-scroll">
+        <table class="cov">
+          <thead>
+            <tr>
+              <th scope="col">Персонаж</th>
+              <th scope="col" class="c">Лицо ×2</th>
+              <th scope="col" class="c">Full front</th>
+              <th scope="col" class="c">Full back</th>
+              <th scope="col" class="c">Правила</th>
+              <th scope="col">Что осталось</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Балтақадыр</th>
+              <td class="c"><span class="mark part" title="1 из 2: только approved V01">1/2</span></td>
+              <td class="c"><span class="mark no" title="нет">—</span></td>
+              <td class="c"><span class="mark no" title="нет">—</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td>Сначала корректная V02-конверсия по V01-лицу, затем 2-й ракурс лица, full front, full back.</td>
+            </tr>
+            <tr>
+              <th scope="row">Ниетжан, 10–14</th>
+              <td class="c"><span class="mark part" title="1 из 2: face candidate">1/2</span></td>
+              <td class="c"><span class="mark part" title="только в draft combined sheet, лицо отдельно">~</span></td>
+              <td class="c"><span class="mark no" title="нет">—</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td>2-й портрет лица, чистый full front и full back по утверждённому лицу (не из draft sheet).</td>
+            </tr>
+            <tr>
+              <th scope="row">Ниетжан, 17</th>
+              <td class="c"><span class="mark part" title="1 из 2: face candidate">1/2</span></td>
+              <td class="c"><span class="mark part" title="только в draft combined sheet, лицо отдельно">~</span></td>
+              <td class="c"><span class="mark no" title="нет">—</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td>2-й портрет лица, чистый full front и full back по утверждённому лицу (не из draft sheet).</td>
+            </tr>
+            <tr>
+              <th scope="row">Ниетжан, 25</th>
+              <td class="c"><span class="mark part" title="1 из 2: approved face">1/2</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td class="c"><span class="mark ok" title="есть">✓</span></td>
+              <td>Добавить 2-й ракурс лица (3/4 или профиль) по утверждённому портрету — комплект почти готов.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend">
+        <span><span class="mark ok">✓</span> готово</span>
+        <span><span class="mark part">~</span> частично / только в draft</span>
+        <span><span class="mark no">—</span> нужно собрать</span>
+      </div>
+    </section>
+
     <section class="sheet">
       <div class="sheet-head">
         <div>
