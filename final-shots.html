@@ -60,11 +60,24 @@
       .shot-head{text-align:left}
       .pill{width:max-content}
     }
-  </style>
+      .brandbar{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+    .brand{display:inline-flex;align-items:center;text-decoration:none}
+    .brand img{height:36px;width:auto;display:block}
+    .brand-fallback{font-weight:900;letter-spacing:.02em;color:var(--ink);font-size:22px;text-transform:lowercase}
+    .brand-tag{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-left:1px solid var(--line);padding-left:14px}
+</style>
 </head>
 <body>
 <header>
   <div class="wrap">
+    <div class="brandbar">
+      <a class="brand" href="./" aria-label="JEL Labs">
+        <img src="assets/brand/jel-labs-logo.png" alt="JEL Labs"
+             onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'">
+        <span class="brand-fallback" style="display:none">jel&nbsp;labs.</span>
+      </a>
+      <span class="brand-tag">AI Film Production</span>
+    </div>
     <h1>«Айтжан. Мұра» — финальные шоты для тестовой анимации</h1>
     <p class="sub">Первые выбранные кадры из шотлиста. По каждому кадру есть две версии: v02 как архивно-фотореалистичный стиль и v03 как живописная acrylic memory версия. Эти PNG можно брать в Seedance/Kling для ручного теста движения.</p>
     <nav class="site-nav" aria-label="Навигация">

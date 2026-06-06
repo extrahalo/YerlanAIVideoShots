@@ -76,11 +76,24 @@
       .stats,.tools{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
     }
-  </style>
+      .brandbar{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+    .brand{display:inline-flex;align-items:center;text-decoration:none}
+    .brand img{height:36px;width:auto;display:block}
+    .brand-fallback{font-weight:900;letter-spacing:.02em;color:var(--ink);font-size:22px;text-transform:lowercase}
+    .brand-tag{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-left:1px solid var(--line);padding-left:14px}
+</style>
 </head>
 <body>
 <header>
   <div class="wrap">
+    <div class="brandbar">
+      <a class="brand" href="./" aria-label="JEL Labs">
+        <img src="assets/brand/jel-labs-logo.png" alt="JEL Labs"
+             onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'">
+        <span class="brand-fallback" style="display:none">jel&nbsp;labs.</span>
+      </a>
+      <span class="brand-tag">AI Film Production</span>
+    </div>
     <h1>«Айтжан. Мұра» — персонажи для утверждения</h1>
     <p class="sub">Рабочая страница персонажей и массовки. Визуальные активы вынесены отдельной группой и не считаются персонажами. У каждого образа есть понятное название, место в сценарии, комментарий редактора, три слота итераций и открытие изображения в крупном размере.</p>
     <nav class="site-nav" aria-label="Навигация">
