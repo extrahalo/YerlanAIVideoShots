@@ -1,0 +1,6 @@
+# macOS Finder noise
+.DS_Store
+**/.DS_Store
+
+# Note: unreviewed generated images are intentionally NOT ignored here,
+# so they stay visible in `git status` for manual review before publishing.
