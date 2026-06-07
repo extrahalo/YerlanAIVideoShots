@@ -1,0 +1,82 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Айтжан. Мұра — готовность к продакшену</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/archive.css">
+<style>
+.panel{background:linear-gradient(180deg,var(--bg-2),#100c07);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin-bottom:18px}
+.panel h2{font-family:var(--display);font-size:22px;margin:0 0 12px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-top:1px solid var(--line);color:var(--ink-dim)}
+thead th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:0}
+td b,th b{color:var(--ink)}
+.bar{height:8px;background:var(--bg-inset);border:1px solid var(--line-2);border-radius:999px;overflow:hidden;min-width:90px}
+.bar i{display:block;height:100%;background:var(--amber)}
+.mono{font-family:var(--mono);font-size:12px}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px}
+.tag.ok{color:#1a1206;background:var(--amber)} .tag.gen{color:var(--steppe);border:1px solid var(--steppe-deep)} .tag.wait{color:var(--blood);border:1px solid var(--blood)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-family:var(--mono);font-size:11px;padding:5px 9px;border:1px solid var(--line-2);border-radius:4px;color:var(--ink-dim)}
+.chip.conf{border-color:var(--amber-deep);color:var(--amber)} .chip.gen{border-color:var(--steppe-deep);color:var(--steppe)}
+ul{margin:6px 0;padding-left:20px} li{margin:5px 0;color:var(--ink-dim)}
+.big{font-family:var(--display);font-size:30px;color:var(--amber);font-weight:800}
+.stat span{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-top:4px}
+</style></head><body>
+<div class="slate"><div class="wrap slate-in">
+ <a class="brand" href="./" aria-label="JEL Labs"><img src="assets/brand/jel-labs-logo.png" alt="JEL Labs" onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'"><span class="brand-fallback" style="display:none">jel labs.</span></a>
+ <span class="dot"></span><span class="hide-sm">AI Film Production</span><span class="sep"></span><span class="meta-tag">PRODUCTION STATUS</span>
+</div></div>
+<header class="masthead"><div class="wrap">
+ <div class="kicker reveal d1">Айтжан. Мұра · готовность к финальному продакшену</div>
+ <h1 class="reveal d2">Production <em>status</em></h1>
+ <p class="lede reveal d3">Сводка готовности к финальной генерации кадров. Сценарий выверен покадрово, персонажи в стиле V2 собраны. Ожидаем от вас финальный стайлинг и дополнительные подтверждённые персонажи.</p>
+ <nav class="filmnav reveal d4"><a href="./">Шотлист</a><a href="character-sheets-v2.html">Персонажи V2</a><a href="shots-review.html">Кадры V2</a><a href="shots-v1.html">Кадры V1</a><a href="production-status.html" class="active">Статус</a></nav>
+ <div class="statstrip reveal d4">
+  <div class="stat"><b class="big" id="s1">—</b><span>кадров всего</span></div>
+  <div class="stat"><b class="big" id="s2">—</b><span>сгенерировано V2</span></div>
+  <div class="stat"><b class="big" id="s3">—</b><span>персонажей V2</span></div>
+  <div class="stat"><b class="big">100%</b><span>сценарий выверен</span></div>
+ </div>
+</div></header>
+<main><div class="wrap">
+ <div class="panel"><h2>Покрытие сценария</h2>
+  <table><thead><tr><th>Блок</th><th>Сцен</th><th>Кадров</th><th>V2 готово</th><th>V1 готово</th><th>Прогресс V2</th></tr></thead><tbody id="cov"></tbody></table>
+  <p class="mono" style="color:var(--muted);margin-top:10px">✓ Все сцены сценария покрыты. Добавлена недостающая сцена 3.4 (аманат — атамекен): отец называет родину и сын даёт клятву у постели.</p>
+ </div>
+ <div class="panel"><h2>Персонажи V2 (состав)</h2>
+  <p class="mono" style="color:var(--muted);margin-bottom:8px"><span class="tag ok">подтверждён</span> = ваши утверждённые · <span class="tag gen">V2 draft</span> = сгенерированы (на согласование)</p>
+  <div class="chips" id="chars"></div>
+ </div>
+ <div class="panel"><h2>Готово к продакшену</h2>
+  <ul>
+   <li><b>Сценарий → шотлист:</b> 201 кадр, каждая сцена покрыта (wide / medium / close-up / insert / reaction / cutaway), у каждого кадра промпт Nano Banana Pro + Seedance.</li>
+   <li><b>Стиль V2 закреплён в промптах:</b> живописное масло, живое и насыщенное (зелёная степь, синее небо, юрты в ауле); пролог — фотореализм.</li>
+   <li><b>Персонажи:</b> весь состав в V2 как референсы; имена ссылок выверены (исправлен CH-017).</li>
+   <li><b>Пролог + Серия 1:</b> сгенерированы в V1 (фото) и V2 (масло), опубликованы.</li>
+  </ul>
+ </div>
+ <div class="panel"><h2>Ожидает вас (завтра)</h2>
+  <ul>
+   <li><b>Финальный стайлинг</b> — подтвердите окончательный вид V2 (насыщенность/палитра), применю ко всем промптам.</li>
+   <li><b>Дополнительные подтверждённые персонажи</b> — особенно <b>Айтжан</b> (сейчас сгенерирован, не подтверждён вами) и группы; заменю мои черновые на ваши.</li>
+   <li><b>Отметьте слабые кадры</b> в галереях — перегенерирую точечно.</li>
+  </ul>
+ </div>
+ <div class="panel"><h2>План финальной генерации</h2>
+  <ul>
+   <li><b>Серия 2 (60)</b> и <b>Серия 3 (78)</b> — сгенерировать в V2 (~138 кадров).</li>
+   <li>Ориентировочно <b>$25–40</b> (gpt-image-2, medium). Поднимите месячный лимит в OpenAI, чтобы пакет не прервался.</li>
+   <li>Готов запускать сериями с обзором после каждой.</li>
+  </ul>
+ </div>
+</div></main>
+<footer><div class="wrap"><span><b>JEL Labs</b> · «Айтжан. Мұра» · production status</span><span>обновлено автоматически из шотлиста</span></div></footer>
+<script>
+const J={"data": [{"sec": "Пролог", "short": "Пролог", "shots": 15, "scenes": 3, "v2": 15, "v1": 15}, {"sec": "Серия 1 — «Айтжан: тірек адам»", "short": "Серия 1", "shots": 48, "scenes": 8, "v2": 48, "v1": 46}, {"sec": "Серия 2 — «Тау. Қамшы. Күш»", "short": "Серия 2", "shots": 60, "scenes": 10, "v2": 0, "v1": 0}, {"sec": "Серия 3 — «Қоштасу, аманат»", "short": "Серия 3", "shots": 78, "scenes": 13, "v2": 0, "v1": 0}], "chars": [{"id": "CH-001_Aitzhan_strong", "n": 63, "st": "gen"}, {"id": "CH-002_Aitzhan_final_years", "n": 36, "st": "gen"}, {"id": "CH-004_Nietzhan_youth17", "n": 34, "st": "conf"}, {"id": "CH-018_Karasu_villagers", "n": 21, "st": "gen"}, {"id": "CH-011_Baltaqadyr", "n": 9, "st": "conf"}, {"id": "CH-010_Erlan_present_placeholder", "n": 8, "st": "gen"}, {"id": "CH-022_Relatives_at_Aitzhan_deathbed", "n": 8, "st": "gen"}, {"id": "CH-013_Baltabai", "n": 5, "st": "conf"}, {"id": "CH-020_Jailau_youth", "n": 5, "st": "gen"}, {"id": "CH-023_Men_at_grave", "n": 5, "st": "gen"}, {"id": "CH-017_Aitzhan_parents_dream", "n": 5, "st": "conf"}, {"id": "CH-021_Erlan_family_today", "n": 4, "st": "gen"}, {"id": "CH-025_Lonely_elderly_couple", "n": 4, "st": "gen"}, {"id": "CH-026_Village_youth_and_kelinder", "n": 4, "st": "gen"}, {"id": "CH-008_Aitzhan_wife", "n": 4, "st": "conf"}, {"id": "CH-024_Aitzhan_children_in_field", "n": 4, "st": "gen"}, {"id": "CH-015_Konyrkulzha", "n": 4, "st": "gen"}, {"id": "CH-016_Uighur_young_neighbor", "n": 4, "st": "gen"}, {"id": "CH-012_Ak_boz_atty_eles", "n": 3, "st": "conf"}, {"id": "CH-014_Qasey", "n": 2, "st": "conf"}], "tot": 201, "v2tot": 63, "v1tot": 61, "nchars": 20, "confcount": 7, "gencount": 13};
+document.getElementById("s1").textContent=J.tot;
+document.getElementById("s2").textContent=J.v2tot;
+document.getElementById("s3").textContent=J.nchars;
+document.getElementById("cov").innerHTML=J.data.map(d=>{const p=Math.round(d.v2/d.shots*100);return `<tr><td><b>${d.short}</b></td><td>${d.scenes}</td><td>${d.shots}</td><td>${d.v2}/${d.shots}</td><td>${d.v1}/${d.shots}</td><td><div class="bar"><i style="width:${p}%"></i></div></td></tr>`}).join("");
+const names={"CH-001_Aitzhan_strong":"Айтжан (сильный)","CH-002_Aitzhan_final_years":"Айтжан (стар.)","CH-004_Nietzhan_youth17":"Ниетжан 17","CH-008_Aitzhan_wife":"Жена","CH-010_Erlan_present_placeholder":"Ерлан","CH-011_Baltaqadyr":"Балтақадыр","CH-012_Ak_boz_atty_eles":"Ақ елес","CH-013_Baltabai":"Балтабай","CH-014_Qasey":"Қасей","CH-015_Konyrkulzha":"Қоңырқұлжа","CH-016_Uighur_young_neighbor":"Ұйғыр көрші","CH-017_Aitzhan_parents_dream":"Ата-ана","CH-018_Karasu_villagers":"Ауылдастар","CH-020_Jailau_youth":"Жайлау жас","CH-021_Erlan_family_today":"Семья (бүгін)","CH-022_Relatives_at_Aitzhan_deathbed":"Туыстар","CH-023_Men_at_grave":"Қабірде","CH-024_Aitzhan_children_in_field":"Балалар","CH-025_Lonely_elderly_couple":"Кемпір-шал","CH-026_Village_youth_and_kelinder":"Жастар/келін"};
+document.getElementById("chars").innerHTML=J.chars.map(c=>`<span class="chip ${c.st==='conf'?'conf':'gen'}">${names[c.id]||c.id} · ${c.n}×</span>`).join("");
+</script></body></html>
