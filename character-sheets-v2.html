@@ -1,116 +1,40 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Айтжан. Мұра — костюм-листы персонажей (V2)</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/archive.css">
-  <style>
-    .sheetgrid{display:grid;grid-template-columns:1fr;gap:18px}
-    .sheetcard{background:linear-gradient(180deg,var(--bg-2),#100c07);border:1px solid var(--line);border-radius:5px;overflow:hidden;transition:.3s var(--ease)}
-    .sheetcard:hover{border-color:var(--line-2);box-shadow:0 24px 60px -30px #000}
-    .sheetcard .sh-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.012)}
-    .sheetcard .sh-id{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--amber);border:1px solid var(--amber-deep);border-radius:3px;padding:3px 8px}
-    .sheetcard h3{font-family:var(--display);font-size:21px;margin:0;color:var(--ink)}
-    .sheetcard .role{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--steppe)}
-    .sheetcard button.shot-img{display:block;width:100%;border:0;background:#000;padding:0;cursor:zoom-in}
-    .sheetcard img{width:100%;display:block}
-    .sheetcard .outfit{padding:11px 16px 14px;color:var(--ink-dim);font-size:14px;line-height:1.5}
-    @media(min-width:980px){.sheetgrid{grid-template-columns:1fr 1fr}}
-  </style>
-</head>
-<body>
-
-<div class="slate">
-  <div class="wrap slate-in">
-    <a class="brand" href="./" aria-label="JEL Labs">
-      <img src="assets/brand/jel-labs-logo.png" alt="JEL Labs"
-           onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'">
-      <span class="brand-fallback" style="display:none">jel labs.</span>
-    </a>
-    <span class="dot" aria-hidden="true"></span>
-    <span class="hide-sm">AI Film Production</span>
-    <span class="sep"></span>
-    <span class="meta-tag">V2 · <b id="slCount">—</b> SHEETS</span>
-  </div>
-</div>
-
-<header class="masthead">
-  <div class="wrap">
-    <div class="kicker reveal d1">Айтжан. Мұра · референсы персонажей</div>
-    <h1 class="reveal d2">Костюм-<em>листы</em></h1>
-    <p class="lede reveal d3">Сгенерированные V2 character sheets — по одному на персонажа, привязаны к утверждённому лицу, у каждого <b>свой костюм</b>. Одиночные: фас, спина, крупный план лица. Групповые: ансамбли с разными лицами и одеждой. Используются как <b>референс</b> при генерации финальных шотов.</p>
-    <nav class="filmnav reveal d4" aria-label="Навигация">
-      <a href="./">Шотлист</a>
-      <a href="characters.html">Персонажи</a>
-      <a href="final-shots.html">Финальные шоты</a>
-      <a href="character-sheets.html">Reference status</a>
-      <a href="character-sheets-v2.html" class="active">Костюм-листы V2</a>
-      <a href="shots-review.html">Превью кадров</a>
-      <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-    <div class="notice"><b>Источник истины — лицо:</b> каждый лист сгенерирован от утверждённого портрета персонажа (gpt-image-2), стиль V2 (архивное фото 1940–50-х). Костюмы намеренно разные, чтобы персонажи различались в кадре. В групповых листах лица специально сделаны разными.</div>
-    <div class="sheetgrid" id="app"></div>
-  </div>
-</main>
-
-<footer><div class="wrap"><span><b>JEL Labs</b> · «Айтжан. Мұра» · костюм-листы V2</span><span>референс для финальных шотов</span></div></footer>
-
-<dialog id="viewer">
-  <div class="modal">
-    <div class="modal-head"><span id="viewerTitle"></span><button id="closeViewer" type="button">Закрыть ✕</button></div>
-    <img id="viewerImg" alt="">
-  </div>
-</dialog>
-
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Айтжан. Мұра — персонажи V2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/archive.css">
+<style>
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.cc{background:linear-gradient(180deg,var(--bg-2),#100c07);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:.25s var(--ease)}
+.cc:hover{border-color:var(--amber);transform:translateY(-3px)}
+.cc button{display:block;width:100%;border:0;background:#000;padding:0;cursor:zoom-in}
+.cc img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+.cc .b{padding:10px 12px}
+.cc .nm{font-family:var(--display);font-size:17px;color:var(--ink)}
+.cc .ro{font-family:var(--body);font-size:13px;color:var(--ink-dim);margin-top:2px}
+.tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:3px;float:right}
+.tag.conf{color:#1a1206;background:var(--amber)}
+.tag.gen{color:var(--steppe);border:1px solid var(--steppe-deep)}
+</style></head><body>
+<div class="slate"><div class="wrap slate-in">
+ <a class="brand" href="./" aria-label="JEL Labs"><img src="assets/brand/jel-labs-logo.png" alt="JEL Labs" onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'"><span class="brand-fallback" style="display:none">jel labs.</span></a>
+ <span class="dot"></span><span class="hide-sm">AI Film Production</span><span class="sep"></span><span class="meta-tag">V2 · <b id="ct">—</b> ПЕРСОНАЖЕЙ</span>
+</div></div>
+<header class="masthead"><div class="wrap">
+ <div class="kicker reveal d1">Айтжан. Мұра · персонажи</div>
+ <h1 class="reveal d2">Персонажи <em>V2</em></h1>
+ <p class="lede reveal d3">Полный состав в финальном стиле <b>V2</b> — живописный масляный портрет, живой и насыщенный. Исторические герои — масло; современные (Ерлан, семья) — фотореализм. <span style="font-family:var(--mono);font-size:12px;color:var(--amber)">золотой тег = подтверждён вами</span>, синий = сгенерирован (на согласование).</p>
+ <nav class="filmnav reveal d4"><a href="./">Шотлист</a><a href="character-sheets-v2.html" class="active">Персонажи V2</a><a href="shots-review.html">Превью кадров</a><a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a></nav>
+</div></header>
+<main><div class="wrap"><div class="cgrid" id="app"></div></div></main>
+<footer><div class="wrap"><span><b>JEL Labs</b> · «Айтжан. Мұра» · персонажи V2</span><span>живописный масляный стиль</span></div></footer>
+<dialog id="viewer"><div class="modal"><div class="modal-head"><span id="vt"></span><button id="cv" type="button">Закрыть ✕</button></div><img id="vi" alt=""></div></dialog>
 <script>
-const sheets=[
- ["CH-001_Aitzhan_strong","Айтжан — сильный","Главный герой в расцвете сил","Тёмный поношенный стёганый чапан, светлая рубаха, кожаный пояс, без головного убора."],
- ["CH-002_Aitzhan_final_years","Айтжан — последние годы","Тот же, постаревший после тифа","Выцветший серо-бурый чапан, тонкий пояс, тёмная тюбетейка; худой, измождённый."],
- ["CH-004_Nietzhan_youth17","Ниетжан, 17","Сын, у постели отца","Тёмная стёганая куртка, бежевая рубаха, фетровая шапка, сапоги."],
- ["CH-008_Aitzhan_wife","Жена Айтжана","Мать Ниетжана, труженица","Тёмное платье-көйлек, камзол, узорчатый платок-жаулык."],
- ["CH-010_Erlan_present_placeholder","Ерлан — наши дни","Рассказчик, внук","Современная одежда: оливковый свитер, рубашка, тёмные брюки."],
- ["CH-011_Baltaqadyr","Балтақадыр","Бывший вор, ставший другом","Крупный, смуглый; рваное тёмное пальто, кушак, шапка с мехом."],
- ["CH-012_Ak_boz_atty_eles","Ақ боз атты елес","Видение-предвестник","Полностью в белом: длинный белый халат и белая чалма, без свечения."],
- ["CH-013_Baltabai","Балтабай","Молодой сосед, кузнец","Тёмно-зелёное подпоясанное пальто, кожаный фартук, фетровая шапка."],
- ["CH-014_Qasey","Қасей","Молодой сосед","Серая стёганая куртка, синяя рубаха, простая шапка; жилистый."],
- ["CH-015_Konyrkulzha","Қоңырқұлжа — емші","Друг-целитель из Туркестана","Светлый песочный чапан, тюбетейка, кожаная сумка-лекарня; седая борода."],
- ["CH-016_Uighur_young_neighbor","Ұйғыр көрші","Сосед, которому доверен сон","Длинное подпоясанное пальто, квадратная уйгурская допа."],
- ["CH-020_Jailau_youth","Жайлау жастары","Молодёжь летнего жайлау","Лёгкая рубаха, открытый фетровый жилет, лёгкие штаны; летний вид."],
- ["CH-017_Aitzhan_parents_dream","Ата-ана (түс)","Родители Айтжана во сне","Старик в светлом чапане, старушка в тёмном платье и белом платке."],
- ["CH-018_Karasu_villagers","Қарасу ауылдастары","Жители аула","Ансамбль: разные чапаны, куртки, платки разных земляных тонов."],
- ["CH-021_Erlan_family_today","Ерлан отбасы (бүгін)","Семья наших дней","Дети и внуки в современной яркой одежде, взрослые."],
- ["CH-022_Relatives_at_Aitzhan_deathbed","Туыстар","Родственники у постели","Скорбящие в приглушённой тёмной одежде, разные лица и возрасты."],
- ["CH-023_Men_at_grave","Қабірдегі еркектер","Мужчины у могилы","Тёмные чапаны, фетровые/меховые шапки, склонённые головы."],
- ["CH-024_Aitzhan_children_in_field","Балалар (егін)","Дети в поле","Четверо детей: мальчики и девочки в простой поношенной одежде."],
- ["CH-025_Lonely_elderly_couple","Кемпір-шал","Одинокая пожилая пара","Старик в тёмном чапане и тюбетейке, старушка в платье и платке."],
- ["CH-026_Village_youth_and_kelinder","Ауыл жастары, келіндер","Молодёжь и келинки","Парни в жилетах и рубахах, молодые невесты в платьях и белых платках."]
-];
-const app=document.getElementById("app");
-const viewer=document.getElementById("viewer"),viewerImg=document.getElementById("viewerImg"),viewerTitle=document.getElementById("viewerTitle");
-document.getElementById("slCount").textContent=sheets.length;
+const items=[["CH-001_Aitzhan_strong", "Айтжан — сильный", "Главный герой, расцвет сил", "gen"], ["CH-002_Aitzhan_final_years", "Айтжан — последние годы", "После болезни, исхудавший", "gen"], ["CH-004_Nietzhan_youth17", "Ниетжан, 17", "Сын у постели отца", "conf"], ["CH-003_Nietzhan_child", "Ниетжан, 10–14", "Сын в детстве", "conf"], ["CH-005_Nietzhan_young_adult", "Ниетжан, 25", "Молодой взрослый", "conf"], ["CH-008_Aitzhan_wife", "Жена Айтжана", "Мать Ниетжана", "conf"], ["CH-017_Aitzhan_parents", "Ата-ана", "Родители Айтжана (сон)", "conf"], ["Family_harvest", "Отбасы (егін)", "Семья Айтжана на жатве", "conf"], ["CH-011_Baltaqadyr", "Балтақадыр", "Вор → друг", "conf"], ["CH-013_Baltabai", "Балтабай", "Молодой сосед, кузнец", "conf"], ["CH-014_Qasey", "Қасей", "Молодой сосед", "conf"], ["CH-015_Konyrkulzha", "Қоңырқұлжа", "Друг-целитель (емші)", "gen"], ["CH-016_Uighur_young_neighbor", "Ұйғыр көрші", "Сосед, вещий сон", "gen"], ["CH-012_Ak_boz_atty_eles", "Ақ боз атты елес", "Видение-предвестник", "conf"], ["CH-020_Jailau_youth", "Жайлау жастары", "Молодёжь джайляу", "gen"], ["CH-018_Karasu_villagers", "Қарасу ауылдастары", "Жители аула", "gen"], ["CH-024_Aitzhan_children_in_field", "Балалар", "Дети в поле", "gen"], ["CH-025_Lonely_elderly_couple", "Кемпір-шал", "Одинокая пожилая пара", "gen"], ["CH-026_Village_youth_and_kelinder", "Жастар, келіндер", "Молодёжь и келинки", "gen"], ["CH-022_Relatives_at_Aitzhan_deathbed", "Туыстар", "Родственники у постели", "gen"], ["CH-023_Men_at_grave", "Қабірдегі еркектер", "Мужчины у могилы", "gen"], ["CH-010_Erlan_present_placeholder", "Ерлан — наши дни", "Рассказчик (фото)", "gen"], ["CH-021_Erlan_family_today", "Отбасы бүгін", "Семья сегодня (фото)", "gen"]];
+const app=document.getElementById("app");document.getElementById("ct").textContent=items.length;
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-app.innerHTML=sheets.map(([f,name,role,outfit])=>{
-  const src=`assets/character-sheets-v2/${f}.png`;
-  return `<section class="sheetcard">
-    <div class="sh-head"><div><span class="sh-id">${esc(f.split('_')[0])}</span> <h3 style="display:inline-block;margin-left:8px;vertical-align:middle">${esc(name)}</h3><div class="role" style="margin-top:6px">${esc(role)}</div></div></div>
-    <button class="shot-img" type="button" data-full="${esc(src)}" data-title="${esc(f+' · '+name)}"><img src="${esc(src)}" alt="${esc(name)}" loading="lazy"></button>
-    <p class="outfit">${esc(outfit)}</p>
-  </section>`;
-}).join("");
-document.querySelectorAll(".shot-img").forEach(b=>b.addEventListener("click",()=>{
-  viewerImg.src=b.dataset.full;viewerImg.alt=b.dataset.title;viewerTitle.innerHTML="<b>SHEET</b> · "+esc(b.dataset.title);viewer.showModal();
-}));
-document.getElementById("closeViewer").addEventListener("click",()=>viewer.close());
-viewer.addEventListener("click",e=>{if(e.target===viewer)viewer.close();});
-</script>
-</body>
-</html>
+app.innerHTML=items.map(([f,nm,ro,src])=>`<div class="cc"><button class="z" data-full="assets/chars-v2-web/${esc(f)}.jpg" data-title="${esc(nm)}"><img src="assets/chars-v2-web/${esc(f)}.jpg" alt="${esc(nm)}" loading="lazy"></button><div class="b"><span class="tag ${src}">${src==='conf'?'подтверждён':'V2 draft'}</span><div class="nm">${esc(nm)}</div><div class="ro">${esc(ro)}</div></div></div>`).join("");
+const v=document.getElementById("viewer"),vi=document.getElementById("vi"),vt=document.getElementById("vt");
+document.querySelectorAll(".z").forEach(b=>b.addEventListener("click",()=>{vi.src=b.dataset.full;vt.textContent=b.dataset.title;v.showModal();}));
+document.getElementById("cv").addEventListener("click",()=>v.close());v.addEventListener("click",e=>{if(e.target===v)v.close();});
+</script></body></html>
