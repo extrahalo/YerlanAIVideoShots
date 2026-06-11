@@ -1,0 +1,82 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Айтжан. Мұра — костюм-листы (финал)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/archive.css">
+<style>
+.sheetsec{margin:38px 0 8px}
+.sheetsec .sk{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.sheetsec h2{font-family:var(--display);font-size:26px;color:var(--ink);margin:3px 0 0;font-weight:800}
+.sheetsec p{font-family:var(--body);font-size:14px;color:var(--ink-dim);margin:4px 0 0;max-width:70ch}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:18px;margin-top:18px}
+@media(max-width:520px){.sgrid{grid-template-columns:1fr}}
+.sc{background:linear-gradient(180deg,var(--bg-2),#100c07);border:1px solid var(--line);border-radius:7px;overflow:hidden;transition:.25s var(--ease)}
+.sc:hover{border-color:var(--amber);transform:translateY(-3px)}
+.sc button{display:block;width:100%;border:0;background:#000;padding:0;cursor:zoom-in}
+.sc img{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.sc .b{padding:11px 13px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.sc .nm{font-family:var(--display);font-size:18px;color:var(--ink)}
+.sc .ro{font-family:var(--body);font-size:12.5px;color:var(--ink-dim);margin-top:2px}
+.tag{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:3px 7px;border-radius:3px;white-space:nowrap;flex-shrink:0}
+.tag.nbp{color:#04121c;background:var(--steppe)}
+.tag.ref{color:#1a1206;background:var(--amber)}
+.tag.photo{color:var(--ink-dim);border:1px solid var(--line)}
+</style></head><body>
+<div class="slate"><div class="wrap slate-in">
+ <a class="brand" href="./" aria-label="JEL Labs"><img src="assets/brand/jel-labs-logo.png" alt="JEL Labs" onerror="this.style.display='none';this.parentNode.querySelector('.brand-fallback').style.display='inline'"><span class="brand-fallback" style="display:none">jel labs.</span></a>
+ <span class="dot"></span><span class="hide-sm">AI Film Production</span><span class="sep"></span><span class="meta-tag">КОСТЮМ-ЛИСТЫ · <b id="ct">—</b></span>
+</div></div>
+<header class="masthead"><div class="wrap">
+ <div class="kicker reveal d1">Айтжан. Мұра · референс-листы персонажей</div>
+ <h1 class="reveal d2">Костюм-листы <em>финал</em></h1>
+ <p class="lede reveal d3">Полные референс-листы (лицо анфас · ¾ · фигура спереди · фигура сзади) в утверждённом стиле — восстановленное архивное фото 1940–50-х. Сгенерированы на <b>Nano Banana Pro</b> 16:9 / 2K по эталону Ниетжана. <span style="font-family:var(--mono);font-size:12px"><span style="color:var(--amber)">золотой = эталон</span> · <span style="color:var(--steppe)">бирюзовый = Nano Banana Pro</span> · серый = фото-плейсхолдер</span>.</p>
+ <nav class="filmnav reveal d4">
+   <a href="./">Шотлист</a>
+   <a href="character-sheets-final.html" class="active">Костюм-листы</a>
+   <a href="character-sheets-v2.html">Персонажи V2</a>
+   <a href="shots-review.html">Превью кадров</a>
+   <a href="production-status.html">Статус</a>
+   <a href="https://github.com/extrahalo/YerlanAIVideoShots">GitHub</a>
+ </nav>
+</div></header>
+<main><div class="wrap" id="app"></div></main>
+<footer><div class="wrap"><span><b>JEL Labs</b> · «Айтжан. Мұра» · костюм-листы</span><span>Nano Banana Pro · не публиковать неутверждённые изображения</span></div></footer>
+<dialog id="viewer"><div class="modal"><div class="modal-head"><span id="vt"></span><button id="cv" type="button">Закрыть ✕</button></div><img id="vi" alt=""></div></dialog>
+<script>
+const SECTIONS=[
+ {sk:"Главные герои",h:"Айтжан и Ниетжан",p:"Айтжан — заново; Ниетжан в трёх возрастах — ваш утверждённый эталон.",items:[
+   ["CH-001_Aitzhan_strong","Айтжан — сильный","Главный герой · расцвет сил","nbp"],
+   ["CH-002_Aitzhan_final_years","Айтжан — последние годы","После тифа · исхудавший","nbp"],
+   ["CH-003_Nietzhan_child","Ниетжан, 10–14","Сын в детстве","ref"],
+   ["CH-004_Nietzhan_youth17","Ниетжан, 17","Сын у постели отца","ref"],
+   ["CH-005_Nietzhan_young_adult","Ниетжан, 25","Молодой взрослый","ref"]]},
+ {sk:"Окружение Айтжана",h:"Друзья и соседи",p:"",items:[
+   ["CH-015_Konyrkulzha","Қоңырқұлжа","Друг-целитель (емші)","nbp"],
+   ["CH-016_Uighur_young_neighbor","Ұйғыр көрші","Сосед · вещий сон","nbp"]]},
+ {sk:"Группы и ансамбли",h:"Массовые сцены",p:"Каждая группа — ростовой ряд с разными лицами, возрастами и костюмами.",items:[
+   ["CH-018_Karasu_villagers","Қарасу ауылдастары","Жители аула · 5 чел.","nbp"],
+   ["CH-020_Jailau_youth","Жайлау жастары","Молодёжь джайляу · 4 чел.","nbp"],
+   ["CH-022_Relatives_at_Aitzhan_deathbed","Туыстар","Родственники у постели · 6 чел.","nbp"],
+   ["CH-023_Men_at_grave","Қабірдегі еркектер","Мужчины у могилы · 5 чел.","nbp"],
+   ["CH-024_Aitzhan_children_in_field","Балалар","Дети в поле · 4 чел.","nbp"],
+   ["CH-025_Lonely_elderly_couple","Кемпір-шал","Одинокая пара · 2 чел.","nbp"],
+   ["CH-026_Village_youth_and_kelinder","Жастар, келіндер","Молодёжь и келинки · 6 чел.","nbp"]]},
+ {sk:"Наши дни · фотореализм",h:"Ерлан и семья",p:"Плейсхолдеры — заменим на фото реального Ерлана, когда пришлёте.",items:[
+   ["CH-010_Erlan_present_placeholder","Ерлан — наши дни","Рассказчик · фото","photo"],
+   ["CH-021_Erlan_family_today","Отбасы бүгін","Семья сегодня · фото","photo"]]},
+ {sk:"Животные",h:"Конь",p:"",items:[
+   ["HORSE_qula_at","Құла ат","Конь Айтжана · профиль + ¾","nbp"]]}
+];
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+const TAGTXT={nbp:"Nano Banana Pro",ref:"эталон",photo:"фото · плейсхолдер"};
+let total=0;
+document.getElementById("app").innerHTML=SECTIONS.map(s=>{
+ total+=s.items.length;
+ return `<div class="sheetsec"><div class="sk">${esc(s.sk)}</div><h2>${esc(s.h)}</h2>${s.p?`<p>${esc(s.p)}</p>`:""}</div>
+ <div class="sgrid">${s.items.map(([f,nm,ro,tag])=>`<div class="sc"><button data-full="assets/character-sheets-final-web/${esc(f)}.jpg" data-title="${esc(nm)}"><img src="assets/character-sheets-final-web/${esc(f)}.jpg" alt="${esc(nm)}" loading="lazy"></button><div class="b"><div><div class="nm">${esc(nm)}</div><div class="ro">${esc(ro)}</div></div><span class="tag ${tag}">${esc(TAGTXT[tag])}</span></div></div>`).join("")}</div>`;
+}).join("");
+document.getElementById("ct").textContent=total;
+const v=document.getElementById("viewer"),vi=document.getElementById("vi"),vt=document.getElementById("vt");
+document.querySelectorAll(".sc button").forEach(b=>b.addEventListener("click",()=>{vi.src=b.dataset.full;vt.textContent=b.dataset.title;v.showModal();}));
+document.getElementById("cv").addEventListener("click",()=>v.close());v.addEventListener("click",e=>{if(e.target===v)v.close();});
+</script></body></html>
