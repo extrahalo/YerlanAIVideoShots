@@ -14,3 +14,4 @@ _gen_review/
 # so they stay visible in `git status` for manual review before publishing.
 assets/character-sheets-final/
 assets/chars-confirmed/
+.claude/
