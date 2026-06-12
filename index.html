@@ -111,7 +111,7 @@ seg.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>{
 search.addEventListener("input",()=>{query=search.value.trim().toLowerCase();render();});
 
 function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function refImg(n){return `assets/characters/${n}_openai_v02.png`;}
+function refImg(n){const m=n.match(/^(CH-\d+)/);return m?`assets/character-sheets-final-web/${m[1]}.jpg`:`assets/characters/${n}_openai_v02.png`;}
 function refLabel(n){return n.replace(/^CH-\d+_/,'').replace(/_/g,' ');}
 
 function frame(name,i){
